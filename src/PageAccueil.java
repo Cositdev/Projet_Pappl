@@ -24,6 +24,7 @@ public class PageAccueil extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					System.out.println("Lancement du programme");
 					PageAccueil frame = new PageAccueil();
 					frame.setVisible(true);
 				} catch (Exception e) {
