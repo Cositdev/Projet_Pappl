@@ -102,7 +102,6 @@ public class SelectionCours extends JFrame {
 					
 					ControlePresence controlePresence= new ControlePresence();
 					controlePresence.setVisible(true);
-					//controlePresence.run();
 				}
 			});
 
