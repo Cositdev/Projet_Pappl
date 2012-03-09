@@ -161,13 +161,13 @@ public class ControlePresence extends JFrame {
 	}
 
 	public ImageIcon createImageIcon(String path) {
-			ImageIcon retour = null ;
+			ImageIcon retour = new ImageIcon() ;
 	
 			
             try {
 				Image img = ImageIO.read(new File(path));
             	Image mieux = img.getScaledInstance(80, 100, 1);
-            	retour.setImage(img);
+            	retour.setImage(mieux);
 
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
