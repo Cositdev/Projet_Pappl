@@ -59,8 +59,8 @@ public class PageAccueil extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				setVisible(false); 
 				
-				//SelectionCours selection = new SelectionCours();
-				//selection.setVisible(true);
+				SelectionCours selection = new SelectionCours();
+				selection.setVisible(true);
 			}
 		});  
 		JPanel milieuxbas = new JPanel();
