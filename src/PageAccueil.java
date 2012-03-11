@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -57,18 +58,26 @@ public class PageAccueil extends JFrame {
 		controler.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				setVisible(false); 
-				
-				SelectionCours selection = new SelectionCours();
-				selection.setVisible(true);
+				commencer();
 			}
 		});  
 		JPanel milieuxbas = new JPanel();
 		milieuxbas.setLayout(new FlowLayout()); 
 		
 		JButton majEtu = new JButton("Télécharger la liste des étudiants");
+		majEtu.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				telechargerListes();
+			}
+		});  
 		JButton majPhoto= new JButton("Télécharger les photos des étudiants");
-
+		majPhoto.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				telechargerPhotos();
+			}
+		});  
 		milieux.add(majEtu);
 		milieux.add(majPhoto);
 		milieux.add(controler);
@@ -83,6 +92,23 @@ public class PageAccueil extends JFrame {
 
 	}
 	
-	
+	public void commencer(){
+		setVisible(false); 
+		
+		SelectionCours selection = new SelectionCours();
+		selection.setVisible(true);
+	}
 
+	public void telechargerListes(){
+		JOptionPane jop = new JOptionPane();
+		
+		jop.showMessageDialog(null,"Non implémenté pour le moment",
+				"Impossible", JOptionPane.ERROR_MESSAGE);
+	}
+	public void telechargerPhotos(){
+		JOptionPane jop = new JOptionPane();
+		
+		jop.showMessageDialog(null,"Non implémenté pour le moment",
+				"Impossible", JOptionPane.ERROR_MESSAGE);
+	}
 }

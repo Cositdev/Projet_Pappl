@@ -29,7 +29,7 @@ public class ControlePresence extends JFrame {
 
 	private JPanel contentPane, panelDroite, panelGauche;
 
-	private String cheminSmiley = "./img/smiley.jpg";
+	private String cheminSmiley = "./img/Moreau.jpg";
 	private String cheminCheck = "./img/check.png";
 
 	private ArrayList<Etudiant> listeEtudiants;
@@ -58,11 +58,17 @@ public class ControlePresence extends JFrame {
 	public ControlePresence() {
 
 		listeEtudiants = new ArrayList<Etudiant>();
-		listeEtudiants.add(new Etudiant("Guillaume Bugnet", "001"));
-		listeEtudiants.add(new Etudiant("Bertrand Magnien", "002"));
+
+		listeEtudiants.add(new Etudiant("Bugnet", "Guillaume","G","http.photo.com","001","100"));
+		listeEtudiants.add(new Etudiant("Bertrand Magnien", "0003584491"));
 		Etudiant antoine = new Etudiant("Antoine NashPatate", "003");
 		antoine.setPresent(true);
 		listeEtudiants.add(antoine);
+		listeEtudiants.add(new Etudiant("Daniel Lefevre", "004"));
+		listeEtudiants.add(new Etudiant("Jean Yves Martin", "005"));
+		listeEtudiants.add(new Etudiant("Morgan Magnin", "006"));
+
+
 		majFenetre();
 	}
 
@@ -130,7 +136,8 @@ public class ControlePresence extends JFrame {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						setVisible(false); 
-						System.exit(0);
+						FenetreListeAbsents fen = new FenetreListeAbsents(listeEtudiants);
+						fen.setVisible(true);
 						
 					}
 				});
@@ -148,8 +155,6 @@ public class ControlePresence extends JFrame {
 		// Gestion de la gauche, liste des élèves
 		panelGauche = new JPanel();
 		panelGauche.setLayout(new BorderLayout());
-
-		jlbLabel1.setIcon(createImageListe(cheminCheck));
 		
 		JList listEleves= majListeEleves();
 

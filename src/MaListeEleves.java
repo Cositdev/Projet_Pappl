@@ -34,12 +34,12 @@ public class MaListeEleves extends DefaultListCellRenderer {
 		Box boiteHorizontale = Box.createHorizontalBox();
 		JLabel labelNom = (JLabel) super.getListCellRendererComponent(list,
 				etudiant.getNom(), index, isSelected, cellHasFocus);
-		labelNom.setPreferredSize(new Dimension(200, 20));
+		labelNom.setPreferredSize(new Dimension(180, 20));
 		boiteHorizontale.add(labelNom);
+
 
 		if (etudiant.getPresent()) {
 			JLabel labelImage = new JLabel();
-
 			System.out.println(etudiant.getNom() + " est present(e)");
 
 			// ImageIcon icon = new
@@ -47,6 +47,7 @@ public class MaListeEleves extends DefaultListCellRenderer {
 			ImageIcon icon = ControlePresence.createImageListe(cheminCheck);
 			labelImage.setIcon(icon);
 			labelImage.setText("Present");
+			labelImage.setPreferredSize(new Dimension(100, 20));
 
 			boiteHorizontale.add(labelImage);
 
