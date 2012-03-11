@@ -98,10 +98,7 @@ public class SelectionCours extends JFrame {
 			validerChoix.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					setVisible(false); 
-					
-					ControlePresence controlePresence= new ControlePresence();
-					controlePresence.setVisible(true);
+					commencer();
 				}
 			});
 
@@ -109,7 +106,7 @@ public class SelectionCours extends JFrame {
 			retour.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					setVisible(false);
+					annuler();
 				}
 			});
 			bas.add(retour);
@@ -130,6 +127,17 @@ public class SelectionCours extends JFrame {
 		for(String s : listeGroupes){
 			jcGroupe.addItem(s);
 		}
+	}
+	
+	public void annuler(){
+		setVisible(false);
+		System.exit(0);
+	}
+	public void commencer(){
+		setVisible(false); 
+		
+		ControlePresence controlePresence= new ControlePresence();
+		controlePresence.setVisible(true);
 	}
 	
 }
