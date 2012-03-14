@@ -72,20 +72,32 @@ public class PageAccueil extends JFrame {
 		JPanel milieuxbas = new JPanel();
 		milieuxbas.setLayout(new FlowLayout()); 
 		
-		JButton majEtu = new JButton("Télécharger la liste des étudiants");
+		String boutonListe = "Télécharger la liste des étudiants";
+		File fichierXml = new File("etudiants.xml");
+		
+		if(fichierXml.exists()) {
+			boutonListe = "Mettre à jour la liste des étudiants";
+		}
+		
+		JButton majEtu = new JButton(boutonListe);
 		majEtu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				telechargerListes();
 			}
-		});  
+		});
+		
 		JButton majPhoto= new JButton("Télécharger les photos des étudiants");
+		if(!fichierXml.exists()) {
+			majPhoto.setEnabled(false);
+		}
 		majPhoto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				telechargerPhotos();
 			}
-		});  
+		});
+		
 		milieux.add(majEtu);
 		milieux.add(majPhoto);
 		milieux.add(controler);
