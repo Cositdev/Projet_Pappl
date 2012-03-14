@@ -34,7 +34,7 @@ public class Etudiant {
 			URL adresse = new URL(this.lienPhoto);
 			URLConnection con = adresse.openConnection();
 			BufferedInputStream in = new BufferedInputStream(con.getInputStream());
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(this.numeroEtudiant + ".jpg"));
+			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("img/" + this.numeroEtudiant + ".jpg"));
 			byte[] read = new byte[1];
 			int len = 1;
 			while ((len = in.read(read)) > 0) {

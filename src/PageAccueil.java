@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileOutputStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +14,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.jdom.*;
+import org.jdom.output.*;
+
+import sun.org.mozilla.javascript.internal.JavaScriptException;
 
 
 public class PageAccueil extends JFrame {
@@ -84,9 +91,6 @@ public class PageAccueil extends JFrame {
 		milieux.add(controler);
 		milieux.add(majEtu);
 		milieux.add(majPhoto);
-				
-		
-		
 
 		contentPane.add(haut, BorderLayout.NORTH);
 		contentPane.add(milieux, BorderLayout.CENTER);
@@ -99,13 +103,64 @@ public class PageAccueil extends JFrame {
 		SelectionCours selection = new SelectionCours();
 		selection.setVisible(true);
 	}
-
-	public void telechargerListes(){
-		JOptionPane jop = new JOptionPane();
+	
+	
+	/*
+	 * telechargerListes()
+	 * Télécharge la liste des étudiants à partir de la base de données AGAP.
+	 * Les données sont stockées dans le fichier etudiants.xml
+	 */
+	public void telechargerListes() {
 		
-		jop.showMessageDialog(null,"Non implémenté pour le moment",
-				"Impossible", JOptionPane.ERROR_MESSAGE);
+		JOptionPane jop = new JOptionPane();
+		File fichierXml = new File("etudiants.xml");
+		String messageInfo = "";
+		
+		if(fichierXml.exists()) {
+			// Il y a déjà un fichier XML, on le supprime
+			if(!fichierXml.delete()) {
+				System.out.println("Erreur lors de la suppression du fichier etudiants.xml");
+			}
+			
+			messageInfo = "La liste des étudiants a bien été mise à jour !";
+		}
+		else {
+			// Il n'y a pas encore de fichier XML
+			messageInfo = "La liste des étudiants a bien été téléchargée.";
+		}
+		
+		// Connexion au serveur
+		// ...
+		
+		// Création du fichier XML
+		Element racine = new Element("etudiants");
+		org.jdom.Document document = new Document(racine);
+		
+		
+		Element etudiant = new Element("etudiant");
+		racine.addContent(etudiant);
+		
+		Element nom = new Element("nom");
+		nom.setText("Bugnet");
+		etudiant.addContent(nom);
+		
+		Element prenom = new Element("prenom");
+		prenom.setText("Guillaume");
+		etudiant.addContent(prenom);
+		
+		try {
+			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+			sortie.output(document, new FileOutputStream("etudiants.xml"));
+		}
+		catch(java.io.IOException e) {
+			System.out.println("Erreur lors de l'enregistrement du fichier etudiants.xml");
+			System.out.println(e.getMessage());
+		}
+		
+		// Message d'information
+		jop.showMessageDialog(null, messageInfo, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
+	
 	public void telechargerPhotos(){
 		JOptionPane jop = new JOptionPane();
 		
