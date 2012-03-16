@@ -115,7 +115,7 @@ public class PageAccueil extends JFrame {
 		jop.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
-	public void telechargerPhotos(){
+	public void telechargerPhotos() {
 		JOptionPane jop = new JOptionPane();
 		
 		jop.showMessageDialog(null,"Non implémenté pour le moment",
