@@ -32,7 +32,6 @@ public class Main {
 		
 		
 		
-		
 		// On lance la fenêtre principale
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

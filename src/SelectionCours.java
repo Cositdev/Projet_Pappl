@@ -52,65 +52,65 @@ public class SelectionCours extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		//Gestion du titre
-			JPanel haut = new JPanel();
-			JLabel Titre = new JLabel("Selection d\'un cours");
-			Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
-			haut.add(Titre);
+		JPanel haut = new JPanel();
+		JLabel Titre = new JLabel("Selection d\'un cours");
+		Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
+		haut.add(Titre);
 
 		//Gestion du milieu
-			JPanel milieux = new JPanel();
-			milieux.setLayout(new GridLayout(3,0));
+		JPanel milieux = new JPanel();
+		milieux.setLayout(new GridLayout(3,0));
 			
-			//Gestion du milieu 1
-				JPanel milieux1 = new JPanel();
-				milieux1.setLayout(new FlowLayout());
-				JLabel jlMatiere = new JLabel("Sélectionnez la matière");
-				jcMatiere = new JComboBox<String>();
-				remplireComboMatiere();
-				milieux1.add(jlMatiere);
-				milieux1.add(jcMatiere);
-				milieux.add(milieux1);
+		//Gestion du milieu 1
+		JPanel milieux1 = new JPanel();
+		milieux1.setLayout(new FlowLayout());
+		JLabel jlMatiere = new JLabel("Sélectionnez la matière");
+		jcMatiere = new JComboBox<String>();
+		remplireComboMatiere();
+		milieux1.add(jlMatiere);
+		milieux1.add(jcMatiere);
+		milieux.add(milieux1);
+		
+		//Gestion du milieu 2
+		JPanel milieux2 = new JPanel();
+		milieux2.setLayout(new FlowLayout());
+		JLabel jlgroupe = new JLabel("Sélectionnez le groupe");
+		jcGroupe = new JComboBox<String>();
+		remplireComboGroupe();
+		milieux2.add(jlgroupe);
+		milieux2.add(jcGroupe);
 			
-			//Gestion du milieu 2
-				JPanel milieux2 = new JPanel();
-				milieux2.setLayout(new FlowLayout());
-				JLabel jlgroupe = new JLabel("Sélectionnez le groupe");
-				jcGroupe = new JComboBox<String>();
-				remplireComboGroupe();
-				milieux2.add(jlgroupe);
-				milieux2.add(jcGroupe);
+		milieux.add(milieux2);
 			
-			milieux.add(milieux2);
-			
-			//Gestion du milieu 3
-				JPanel milieux3 = new JPanel();
-				milieux3.setLayout(new FlowLayout());
-				JLabel jlDate1 = new JLabel("Date");
-				JLabel jlDate2 = new JLabel("1er Janvier 2034 - 02h00");
-				milieux3.add(jlDate1);
-				milieux3.add(jlDate2);
-			
-			milieux.add(milieux3);
+		//Gestion du milieu 3
+		JPanel milieux3 = new JPanel();
+		milieux3.setLayout(new FlowLayout());
+		JLabel jlDate1 = new JLabel("Date");
+		JLabel jlDate2 = new JLabel("1er Janvier 2034 - 02h00");
+		milieux3.add(jlDate1);
+		milieux3.add(jlDate2);
+		
+		milieux.add(milieux3);
 
-			JPanel bas = new JPanel();
-			bas.setLayout(new FlowLayout());
-			JButton validerChoix = new JButton("Valider");
-			validerChoix.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					commencer();
-				}
-			});
+		JPanel bas = new JPanel();
+		bas.setLayout(new FlowLayout());
+		JButton validerChoix = new JButton("Valider");
+		validerChoix.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				commencer();
+			}
+		});
 
-			JButton retour = new JButton("Retour");
-			retour.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					annuler();
-				}
-			});
-			bas.add(retour);
-			bas.add(validerChoix);
+		JButton retour = new JButton("Retour");
+		retour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				annuler();
+			}
+		});
+		bas.add(retour);
+		bas.add(validerChoix);
 
 		contentPane.add(haut, BorderLayout.NORTH);
 		contentPane.add(milieux, BorderLayout.CENTER);
