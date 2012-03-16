@@ -50,6 +50,14 @@ public class Etudiant {
 			return false;
 		}
 	}
+	
+	
+	public String toString() {
+		return this.nom + " " + this.prenom + ", groupe : " + this.groupe + "\n" +
+				this.numeroEtudiant + " - " + this.numeroMifare + " - " + this.lienPhoto;
+	}
+	
+	
 	public String getNom(){
 		return this.nom;
 	}
@@ -92,6 +100,4 @@ public class Etudiant {
 	public void setPresent(Boolean present) {
 		this.present = present;
 	}
-	
-	
 }
