@@ -98,6 +98,7 @@ public class PageAccueil extends JFrame {
 		
 		SelectionCours selection = new SelectionCours();
 		selection.setVisible(true);
+		setVisible(true);
 	}
 
 	public void telechargerListes(){
