@@ -34,7 +34,7 @@ public class Etudiant {
 			URL adresse = new URL(this.lienPhoto);
 			URLConnection con = adresse.openConnection();
 			BufferedInputStream in = new BufferedInputStream(con.getInputStream());
-			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(this.numeroEtudiant + ".jpg"));
+			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("img/" + this.numeroEtudiant + ".jpg"));
 			byte[] read = new byte[1];
 			int len = 1;
 			while ((len = in.read(read)) > 0) {
@@ -50,6 +50,14 @@ public class Etudiant {
 			return false;
 		}
 	}
+	
+	
+	public String toString() {
+		return this.nom + " " + this.prenom + ", groupe : " + this.groupe + "\n" +
+				this.numeroEtudiant + " - " + this.numeroMifare + " - " + this.lienPhoto;
+	}
+	
+	
 	public String getNom(){
 		return this.nom;
 	}
@@ -92,6 +100,4 @@ public class Etudiant {
 	public void setPresent(Boolean present) {
 		this.present = present;
 	}
-	
-	
 }

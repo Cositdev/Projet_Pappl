@@ -1,10 +1,10 @@
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,26 +19,10 @@ public class PageAccueil extends JFrame {
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					System.out.println("Lancement du programme");
-					PageAccueil frame = new PageAccueil();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
 	 */
 	public PageAccueil() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -65,32 +49,40 @@ public class PageAccueil extends JFrame {
 		JPanel milieuxbas = new JPanel();
 		milieuxbas.setLayout(new FlowLayout()); 
 		
-		JButton majEtu = new JButton("Télécharger la liste des étudiants");
+		String boutonListe = "Télécharger la liste des étudiants";
+		File fichierXml = new File("etudiants.xml");
+		
+		if(fichierXml.exists()) {
+			boutonListe = "Mettre à jour la liste des étudiants";
+		}
+		
+		JButton majEtu = new JButton(boutonListe);
 		majEtu.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				telechargerListes();
 			}
-		});  
+		});
+		
 		JButton majPhoto= new JButton("Télécharger les photos des étudiants");
+		if(!fichierXml.exists()) {
+			majPhoto.setEnabled(false);
+		}
 		majPhoto.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				telechargerPhotos();
 			}
-		});  
+		});
+		
 		milieux.add(majEtu);
 		milieux.add(majPhoto);
 		milieux.add(controler);
 		milieux.add(majEtu);
 		milieux.add(majPhoto);
-				
-		
-		
 
 		contentPane.add(haut, BorderLayout.NORTH);
 		contentPane.add(milieux, BorderLayout.CENTER);
-
 	}
 	
 	public void commencer(){
@@ -100,14 +92,31 @@ public class PageAccueil extends JFrame {
 		selection.setVisible(true);
 		setVisible(true);
 	}
-
-	public void telechargerListes(){
+	
+	
+	/*
+	 * telechargerListes()
+	 * Télécharge la liste des étudiants à partir de la base de données AGAP.
+	 * Les données sont stockées dans le fichier etudiants.xml
+	 */
+	public void telechargerListes() {
+		
+		String message;
 		JOptionPane jop = new JOptionPane();
 		
-		jop.showMessageDialog(null,"Non implémenté pour le moment",
-				"Impossible", JOptionPane.ERROR_MESSAGE);
+		// On télécharge la liste des étudiants depuis la base de données AGAP
+		if(!Main.telechargerListeEtudiants()) {
+			message = "Erreur lors de la suppression du fichier XML. Veuillez recommencer.";
+		}
+		else {
+			message = "La liste des étudiants a bien été mise à jour !";
+		}
+		
+		// Message d'information
+		jop.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
-	public void telechargerPhotos(){
+	
+	public void telechargerPhotos() {
 		JOptionPane jop = new JOptionPane();
 		
 		jop.showMessageDialog(null,"Non implémenté pour le moment",
