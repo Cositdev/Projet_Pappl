@@ -19,6 +19,8 @@ public class SelectionCours extends JFrame {
 
 	private JPanel contentPane;
 	private ArrayList<String> listeMatieres,listeGroupes;
+	private static String matiereChoisie = "";
+	private static String groupeChoisi = "";
 	
 	JComboBox<String> jcMatiere,jcGroupe;
 	
@@ -38,11 +40,11 @@ public class SelectionCours extends JFrame {
 		
 		
 		listeGroupes = new ArrayList<String>();
-		listeGroupes.add("EI1_Gr1");
-		listeGroupes.add("EI1_Gr2");
-		listeGroupes.add("EI1_Gr3");
-		listeGroupes.add("EI1_Gr4");
-		listeGroupes.add("EI3_Info");
+		listeGroupes.add("A");
+		listeGroupes.add("B");
+		listeGroupes.add("C");
+		listeGroupes.add("EI3SIM");listeGroupes.add("EI3MATER");listeGroupes.add("EI3ENERG");
+		listeGroupes.add("EI3INFO");listeGroupes.add("EI3DPSI");listeGroupes.add("EI3ISIS");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 349, 224);
@@ -118,26 +120,58 @@ public class SelectionCours extends JFrame {
 
 	}
 
-	public void remplireComboMatiere(){
-		for(String s : listeMatieres){
+	public void remplireComboMatiere() {
+		for(String s : listeMatieres) {
 			jcMatiere.addItem(s);
 		}
 	}
-	public void remplireComboGroupe(){
-		for(String s : listeGroupes){
+	public void remplireComboGroupe() {
+		for(String s : listeGroupes) {
 			jcGroupe.addItem(s);
 		}
 	}
 	
-	public void annuler(){
-		setVisible(false);
-		System.exit(0);
-	}
-	public void commencer(){
-		setVisible(false); 
-		
-		ControlePresence controlePresence= new ControlePresence();
-		controlePresence.setVisible(true);
+	
+	/**
+	 * Retourner à la fenêtre d'accueil
+	 */
+	public void annuler() {
+		// On masque la fenêtre de séléction du cours, on affiche la fenêtre d'accueil
+		Main.fenetreSelectionCours.setVisible(false);
+		Main.fenetreAccueil.setVisible(true);
 	}
 	
+	
+	/**
+	 * Commencer le contrôle de présence (passage à la fenêtre de contrôle)
+	 */
+	public void commencer() {
+		// On récupère les valeurs des listes déroulantes
+		matiereChoisie = (String) jcMatiere.getSelectedItem();
+		groupeChoisi = (String) jcGroupe.getSelectedItem();
+		
+		System.out.println(SelectionCours.matiereChoisie);
+		System.out.println(matiereChoisie);
+		System.out.println(SelectionCours.getMatiereChoisie());
+		
+		// On récupère la liste des étudiants du groupe choisi dans le fichier XML
+		ListeEtudiants.lireFichierXML(groupeChoisi);
+		
+		// On télécharge les photos des étudiants concernés
+		ListeEtudiants.telechargerPhotos();
+		
+		// On affiche la fenêtre de contrôle, on masque la fenêtre de séléction du cours
+		Main.fenetreSelectionCours.setVisible(false);
+		Main.fenetreControle.majFenetre();
+		Main.fenetreControle.setVisible(true);
+	}
+	
+	
+	public static String getMatiereChoisie() {
+		return matiereChoisie;
+	}
+
+	public static String getGroupeChoisi() {
+		return groupeChoisi;
+	}
 }
