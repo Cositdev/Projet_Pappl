@@ -19,8 +19,8 @@ public class SelectionCours extends JFrame {
 
 	private JPanel contentPane;
 	private ArrayList<String> listeMatieres,listeGroupes;
-	private static String matiereChoisie;
-	private static String groupeChoisi;
+	private static String matiereChoisie = "";
+	private static String groupeChoisi = "";
 	
 	JComboBox<String> jcMatiere,jcGroupe;
 	
@@ -120,34 +120,52 @@ public class SelectionCours extends JFrame {
 
 	}
 
-	public void remplireComboMatiere(){
-		for(String s : listeMatieres){
+	public void remplireComboMatiere() {
+		for(String s : listeMatieres) {
 			jcMatiere.addItem(s);
 		}
 	}
-	public void remplireComboGroupe(){
-		for(String s : listeGroupes){
+	public void remplireComboGroupe() {
+		for(String s : listeGroupes) {
 			jcGroupe.addItem(s);
 		}
 	}
 	
+	
+	/**
+	 * Retourner à la fenêtre d'accueil
+	 */
 	public void annuler() {
-		
 		// On masque la fenêtre de séléction du cours, on affiche la fenêtre d'accueil
 		Main.fenetreSelectionCours.setVisible(false);
 		Main.fenetreAccueil.setVisible(true);
-		
 	}
 	
+	
+	/**
+	 * Commencer le contrôle de présence (passage à la fenêtre de contrôle)
+	 */
 	public void commencer() {
-		
 		// On récupère les valeurs des listes déroulantes
-		SelectionCours.matiereChoisie = (String) jcMatiere.getSelectedItem();
-		SelectionCours.groupeChoisi = (String) jcGroupe.getSelectedItem();
+		matiereChoisie = (String) jcMatiere.getSelectedItem();
+		groupeChoisi = (String) jcGroupe.getSelectedItem();
+		
+		System.out.println(SelectionCours.matiereChoisie);
+		System.out.println(matiereChoisie);
+		System.out.println(SelectionCours.getMatiereChoisie());
 		
 		// On affiche la fenêtre de contrôle, on masque la fenêtre de séléction du cours
 		Main.fenetreSelectionCours.setVisible(false);
+		Main.fenetreControle.majFenetre();
 		Main.fenetreControle.setVisible(true);
 	}
 	
+	
+	public static String getMatiereChoisie() {
+		return matiereChoisie;
+	}
+
+	public static String getGroupeChoisi() {
+		return groupeChoisi;
+	}
 }

@@ -1,6 +1,7 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -54,7 +55,7 @@ public class ControlePresence extends JFrame {
 	*/
 
 	/**
-	 * Create the frame.
+	 * Création de la fenêtre
 	 */
 	public ControlePresence() {
 
@@ -87,15 +88,17 @@ public class ControlePresence extends JFrame {
 		
 		Map<Object, ImageIcon> icons = new HashMap<Object, ImageIcon>();
 		icons.put("present", createImageListe(cheminCheck));
-
-
+		
+		// Affichage du titre de la fenêtre
+		String labelTitre = "Contrôle de présence - " +
+							SelectionCours.getMatiereChoisie() + " - " +
+							SelectionCours.getGroupeChoisi();
+		JPanel haut = new JPanel();
+		JLabel titreFenetre = new JLabel(labelTitre);
+		titreFenetre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		
 		
-		
-		
-		JLabel titreFenetre = new JLabel("Contrôle en cours");
-
-		// Gestion de la droite, ou se trouve l'image et le champ de texte
+		// Gestion de la partie droite (image + champ de texte)
 		panelDroite = new JPanel();
 		panelDroite.setLayout(new BorderLayout());
 		
@@ -191,9 +194,9 @@ public class ControlePresence extends JFrame {
 		for (Etudiant etu : listeEtudiants) {
 			if (etu.getNumeroMifare().equals(myfareTrouve)) {
 				etu.setPresent(true);
-				System.out.println(myfareTrouve
+				/*System.out.println(myfareTrouve
 						+ " a ete considere comme present : c\'est "
-						+ etu.getNom());
+						+ etu.getNom());*/
 			}
 		}
 		textFieldInput.setText("");
@@ -225,7 +228,7 @@ public class ControlePresence extends JFrame {
 			Image img = ImageIO.read(new File(path));
         	Image mieux = img.getScaledInstance(30, 30, 1);
         	retour.setImage(mieux);
-    		System.out.println("on renvoie bien l'image");
+    		//System.out.println("on renvoie bien l'image");
 
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block

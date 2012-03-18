@@ -32,13 +32,13 @@ public class PageAccueil extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		//Gestion du titre
+		// Affichage du titre
 		JPanel haut = new JPanel();
 		JLabel Titre = new JLabel("Contrôle de présence");
 		Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		haut.add(Titre);
 		
-		//Gestion des deux boutons
+		// Gestion des deux boutons
 		JPanel milieux = new JPanel();
 		milieux.setLayout(new GridLayout(2,0));
 		JButton controler = new JButton("Commencer le contrôle de présence");
