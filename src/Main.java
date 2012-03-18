@@ -5,7 +5,7 @@ public class Main {
 	
 	/**
 	 * Chaque fenêtre utilisée dans l'application est un attribut,
-	 * qui pourra être utilisé par toutes les classes
+	 * qui pourront être utilisés par toutes les classes
 	 */
 	protected static PageAccueil fenetreAccueil;
 	protected static SelectionCours fenetreSelectionCours;

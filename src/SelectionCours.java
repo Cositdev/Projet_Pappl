@@ -40,11 +40,11 @@ public class SelectionCours extends JFrame {
 		
 		
 		listeGroupes = new ArrayList<String>();
-		listeGroupes.add("EI1_Gr1");
-		listeGroupes.add("EI1_Gr2");
-		listeGroupes.add("EI1_Gr3");
-		listeGroupes.add("EI1_Gr4");
-		listeGroupes.add("EI3_Info");
+		listeGroupes.add("A");
+		listeGroupes.add("B");
+		listeGroupes.add("C");
+		listeGroupes.add("EI3SIM");listeGroupes.add("EI3MATER");listeGroupes.add("EI3ENERG");
+		listeGroupes.add("EI3INFO");listeGroupes.add("EI3DPSI");listeGroupes.add("EI3ISIS");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 349, 224);
@@ -153,6 +153,12 @@ public class SelectionCours extends JFrame {
 		System.out.println(SelectionCours.matiereChoisie);
 		System.out.println(matiereChoisie);
 		System.out.println(SelectionCours.getMatiereChoisie());
+		
+		// On récupère la liste des étudiants du groupe choisi dans le fichier XML
+		ListeEtudiants.lireFichierXML(groupeChoisi);
+		
+		// On télécharge les photos des étudiants concernés
+		ListeEtudiants.telechargerPhotos();
 		
 		// On affiche la fenêtre de contrôle, on masque la fenêtre de séléction du cours
 		Main.fenetreSelectionCours.setVisible(false);

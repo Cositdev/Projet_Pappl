@@ -32,8 +32,7 @@ public class ControlePresence extends JFrame {
 
 	private String cheminSmiley = "./img/Moreau.jpg";
 	private String cheminCheck = "./img/check.png";
-
-	private ArrayList<Etudiant> listeEtudiants;
+	
 	private JTextField textFieldInput;
 	private JSplitPane splitPane;
 
@@ -55,39 +54,29 @@ public class ControlePresence extends JFrame {
 	*/
 
 	/**
-	 * Création de la fenêtre
+	 * Constructeur
 	 */
 	public ControlePresence() {
-
-		listeEtudiants = new ArrayList<Etudiant>();
-
-		listeEtudiants.add(new Etudiant("Bugnet", "Guillaume","G","http.photo.com","001","100"));
-		listeEtudiants.add(new Etudiant("Bertrand Magnien", "0003584491"));
-		Etudiant antoine = new Etudiant("Antoine NashPatate", "003");
-		antoine.setPresent(true);
-		listeEtudiants.add(antoine);
-		listeEtudiants.add(new Etudiant("Daniel Lefevre", "004"));
-		listeEtudiants.add(new Etudiant("Jean Yves Martin", "005"));
-		listeEtudiants.add(new Etudiant("Morgan Magnin", "006"));
-
-
 		majFenetre();
 	}
-
+	
+	
+	/**
+	 * Création de la fenêtre de contrôle de présence
+	 */
 	public void majFenetre() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 300);
 		setResizable(true);
 		contentPane = new JPanel();
-		// contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
 		
-		
 		Map<Object, ImageIcon> icons = new HashMap<Object, ImageIcon>();
 		icons.put("present", createImageListe(cheminCheck));
+		
 		
 		// Affichage du titre de la fenêtre
 		String labelTitre = "Contrôle de présence - " +
@@ -138,7 +127,7 @@ public class ControlePresence extends JFrame {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
 						setVisible(false); 
-						FenetreListeAbsents fen = new FenetreListeAbsents(listeEtudiants);
+						FenetreListeAbsents fen = new FenetreListeAbsents(ListeEtudiants.etudiants);
 						fen.setVisible(true);
 						
 					}
@@ -178,10 +167,10 @@ public class ControlePresence extends JFrame {
 	}
 
 	public JList majListeEleves() {
-		int nombreEtudiants = listeEtudiants.size();
+		int nombreEtudiants = ListeEtudiants.etudiants.size();
 		int position = 0;
 		Etudiant[] vecteurEtudiants = new Etudiant[nombreEtudiants];
-		for (Etudiant etu : listeEtudiants) {
+		for (Etudiant etu : ListeEtudiants.etudiants) {
 			vecteurEtudiants[position]=etu;
 			position++;
 		}
@@ -191,7 +180,7 @@ public class ControlePresence extends JFrame {
 
 	public void rechercheETUpdate() {
 		String myfareTrouve = textFieldInput.getText();
-		for (Etudiant etu : listeEtudiants) {
+		for (Etudiant etu : ListeEtudiants.etudiants) {
 			if (etu.getNumeroMifare().equals(myfareTrouve)) {
 				etu.setPresent(true);
 				/*System.out.println(myfareTrouve

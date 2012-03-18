@@ -125,4 +125,22 @@ public class ListeEtudiants {
 		
 		return true;
 	}
+	
+	
+	/**
+	 * Télécharger les photos des étudiants concernés par le contrôle de présence (appartenant au groupe séléctionné)
+	 * @return Nombre de photos qui n'ont pas pu être téléchargées
+	 */
+	public static int telechargerPhotos() {
+		
+		int erreurs = 0;
+		
+		for(Etudiant e : etudiants) {
+			if(! e.telechargerPhoto()) {
+				erreurs ++;
+			}
+		}
+		
+		return erreurs;
+	}
 }
