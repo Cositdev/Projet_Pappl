@@ -20,8 +20,7 @@ public class Main {
 	 * Lancement de l'application
 	 */
 	public static void main(String[] args) {
-		
-		
+				
 		// Pour teste la lecture du fichier XML
 		Main.lireFichierXML("A");
 		
