@@ -30,7 +30,7 @@ public class ControlePresence extends JFrame {
 
 	private JPanel contentPane, panelDroite, panelGauche;
 
-	private String cheminSmiley = "./img/Moreau.jpg";
+	private String cheminSmiley = "./img/smiley.jpg";
 	private String cheminCheck = "./img/check.png";
 	
 	private JTextField textFieldInput;
