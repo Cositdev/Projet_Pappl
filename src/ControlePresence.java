@@ -30,8 +30,10 @@ public class ControlePresence extends JFrame {
 
 	private JPanel contentPane, panelDroite, panelGauche;
 
-	private String cheminSmiley = "./img/smiley.jpg";
+	private String cheminAnonyme = "./img/anonyme.jpg";
 	private String cheminCheck = "./img/check.png";
+	
+	private Etudiant dernierEtudiant;
 	
 	private JTextField textFieldInput;
 	private JSplitPane splitPane;
@@ -57,6 +59,7 @@ public class ControlePresence extends JFrame {
 	 * Constructeur
 	 */
 	public ControlePresence() {
+		this.dernierEtudiant = null;
 		majFenetre();
 	}
 	
@@ -93,68 +96,76 @@ public class ControlePresence extends JFrame {
 		
 		Box boiteVerticale = Box.createVerticalBox();
 		boiteVerticale.add(Box.createGlue());
-			Box boiteHorizontale1= Box.createHorizontalBox();
-			boiteHorizontale1.add(Box.createGlue());
-
-			ImageIcon icone = createImageIcon(cheminSmiley);
-			
-			JLabel jlbLabel1 = new JLabel(icone, JLabel.CENTER);
-			jlbLabel1.setPreferredSize(new Dimension(100, 100));
-			boiteHorizontale1.add(jlbLabel1);
-			boiteHorizontale1.add(Box.createGlue());
-			
+		Box boiteHorizontale1= Box.createHorizontalBox();
+		boiteHorizontale1.add(Box.createGlue());
+		
+		String cheminImage = "";
+		
+		if(this.dernierEtudiant == null) {
+			cheminImage = this.cheminAnonyme;
+		}
+		else {
+			cheminImage = this.dernierEtudiant.getLienPhoto();
+		}
+		
+		ImageIcon icone = createImageIcon(cheminImage);
+		
+		JLabel jlbLabel1 = new JLabel(icone, JLabel.CENTER);
+		jlbLabel1.setPreferredSize(new Dimension(100, 100));
+		boiteHorizontale1.add(jlbLabel1);
+		boiteHorizontale1.add(Box.createGlue());
+		
 		boiteVerticale.add(boiteHorizontale1);
 		
-			Box boiteHorizontale2= Box.createHorizontalBox();
-			boiteHorizontale2.add(Box.createGlue());
-				textFieldInput = new JTextField();
-				textFieldInput.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						rechercheETUpdate();
-					}
-				});
-				textFieldInput.setPreferredSize(new Dimension(100, 20));
-				textFieldInput.setMaximumSize(new Dimension(100, 20));
-			boiteHorizontale2.add(textFieldInput);
-			boiteHorizontale2.add(Box.createGlue());
+		Box boiteHorizontale2= Box.createHorizontalBox();
+		boiteHorizontale2.add(Box.createGlue());
+		textFieldInput = new JTextField();
+		textFieldInput.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				rechercheETUpdate();
+			}
+		});
+		
+		textFieldInput.setPreferredSize(new Dimension(100, 20));
+		textFieldInput.setMaximumSize(new Dimension(100, 20));
+		boiteHorizontale2.add(textFieldInput);
+		boiteHorizontale2.add(Box.createGlue());
 			
 		boiteVerticale.add(boiteHorizontale2);
 		
-			Box boiteHorizontale3= Box.createHorizontalBox();
-			boiteHorizontale3.add(Box.createGlue());
-				JButton boutonFinControle = new JButton("Fin du contrôle");
-				boutonFinControle.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						setVisible(false); 
-						FenetreListeAbsents fen = new FenetreListeAbsents(ListeEtudiants.etudiants);
-						fen.setVisible(true);
-						
-					}
-				});
-				boiteHorizontale3.add(boutonFinControle);
-				boiteHorizontale3.add(Box.createGlue());
+		Box boiteHorizontale3= Box.createHorizontalBox();
+		boiteHorizontale3.add(Box.createGlue());
+		JButton boutonFinControle = new JButton("Fin du contrôle");
+		boutonFinControle.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				setVisible(false); 
+				FenetreListeAbsents fen = new FenetreListeAbsents(ListeEtudiants.etudiants);
+				fen.setVisible(true);
+			}
+		});
+		
+		boiteHorizontale3.add(boutonFinControle);
+		boiteHorizontale3.add(Box.createGlue());
 			
 		boiteVerticale.add(boiteHorizontale3);
-		
 		
 		boiteVerticale.add(Box.createGlue());
 		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
 
 		
-		
-		// Gestion de la gauche, liste des élèves
+		// Gestion de la partie gauche (liste des étudiants)
 		panelGauche = new JPanel();
 		panelGauche.setLayout(new BorderLayout());
 		
-		JList listEleves= majListeEleves();
+		JList listeEtudiants = majListeEtudiants();
 
 		// create a cell renderer to add the appropriate icon
 
-		listEleves.setCellRenderer(new MaListeEleves(icons));
+		listeEtudiants.setCellRenderer(new MaListeEleves(icons));
 		
 
-		panelGauche.add(listEleves, BorderLayout.CENTER);
+		panelGauche.add(listeEtudiants, BorderLayout.CENTER);
 
 		JSplitPane splitPane= new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				panelGauche, panelDroite);
@@ -163,21 +174,24 @@ public class ControlePresence extends JFrame {
 		contentPane.add(splitPane, BorderLayout.CENTER);
 		contentPane.add(titreFenetre, BorderLayout.NORTH);
 		// contentPane.add(panelDroite, BorderLayout.EAST);
-		//
 	}
-
-	public JList majListeEleves() {
+	
+	
+	public JList majListeEtudiants() {
 		int nombreEtudiants = ListeEtudiants.etudiants.size();
 		int position = 0;
 		Etudiant[] vecteurEtudiants = new Etudiant[nombreEtudiants];
+		
 		for (Etudiant etu : ListeEtudiants.etudiants) {
-			vecteurEtudiants[position]=etu;
-			position++;
+			vecteurEtudiants[position] = etu;
+			position ++;
 		}
-		JList listEleves= new JList(vecteurEtudiants);
-		return listEleves;
+		
+		JList liste = new JList(vecteurEtudiants);
+		return liste;
 	}
-
+	
+	
 	public void rechercheETUpdate() {
 		String myfareTrouve = textFieldInput.getText();
 		for (Etudiant etu : ListeEtudiants.etudiants) {
@@ -189,7 +203,7 @@ public class ControlePresence extends JFrame {
 			}
 		}
 		textFieldInput.setText("");
-		majListeEleves();
+		majListeEtudiants();
 		this.repaint();
 
 	}

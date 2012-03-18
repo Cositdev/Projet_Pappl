@@ -33,7 +33,10 @@ public class MaListeEleves extends DefaultListCellRenderer {
 
 		Box boiteHorizontale = Box.createHorizontalBox();
 		JLabel labelNom = (JLabel) super.getListCellRendererComponent(list,
-				etudiant.getNom(), index, isSelected, cellHasFocus);
+																	  etudiant.getNom() + " " + etudiant.getPrenom(),
+																	  index,
+																	  isSelected,
+																	  cellHasFocus);
 		labelNom.setPreferredSize(new Dimension(180, 20));
 		boiteHorizontale.add(labelNom);
 
