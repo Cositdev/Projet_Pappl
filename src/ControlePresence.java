@@ -75,8 +75,6 @@ public class ControlePresence extends JFrame {
 
 	public void majFenetre() {
 		
-		System.out.println("MISE A JOUR DE L\'affichage de la fenêtre");
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 300);
 		setResizable(true);

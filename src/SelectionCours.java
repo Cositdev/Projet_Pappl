@@ -139,11 +139,15 @@ public class SelectionCours extends JFrame {
 		
 	}
 	
-	public void commencer(){
-		setVisible(false); 
+	public void commencer() {
 		
-		ControlePresence controlePresence= new ControlePresence();
-		controlePresence.setVisible(true);
+		// On récupère les valeurs des listes déroulantes
+		SelectionCours.matiereChoisie = (String) jcMatiere.getSelectedItem();
+		SelectionCours.groupeChoisi = (String) jcGroupe.getSelectedItem();
+		
+		// On affiche la fenêtre de contrôle, on masque la fenêtre de séléction du cours
+		Main.fenetreSelectionCours.setVisible(false);
+		Main.fenetreControle.setVisible(true);
 	}
 	
 }
