@@ -38,7 +38,7 @@ public class ControlePresence extends JFrame {
 
 	/**
 	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -51,6 +51,7 @@ public class ControlePresence extends JFrame {
 			}
 		});
 	}
+	*/
 
 	/**
 	 * Create the frame.

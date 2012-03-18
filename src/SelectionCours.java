@@ -19,6 +19,8 @@ public class SelectionCours extends JFrame {
 
 	private JPanel contentPane;
 	private ArrayList<String> listeMatieres,listeGroupes;
+	private static String matiereChoisie;
+	private static String groupeChoisi;
 	
 	JComboBox<String> jcMatiere,jcGroupe;
 	
@@ -129,11 +131,12 @@ public class SelectionCours extends JFrame {
 		}
 	}
 	
-	public void annuler(){
-		setVisible(false); 
+	public void annuler() {
 		
-		PageAccueil accueil = new PageAccueil();
-		accueil.setVisible(true);
+		// On masque la fenêtre de séléction du cours, on affiche la fenêtre d'accueil
+		Main.fenetreSelectionCours.setVisible(false);
+		Main.fenetreAccueil.setVisible(true);
+		
 	}
 	
 	public void commencer(){

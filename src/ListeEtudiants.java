@@ -1,11 +1,14 @@
 import java.awt.EventQueue;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 
 import org.jdom.*;
 import org.jdom.input.*;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import org.jdom.filter.*;
 
 public class ListeEtudiants {
@@ -18,9 +21,9 @@ public class ListeEtudiants {
 	
 	/**
 	 * Télécharge la liste des étudiants depuis la base de données AGAP, et
-	 * sauvegarde les données dans un fichier XML (etudiants.xml) et dans l'attribut 'etudiants'
+	 * sauvegarde les données dans un fichier XML (etudiants.xml)
 	 * @return
-	 * boolean : true si la mise a jour a été correctement effectuée, false sinon
+	 * boolean : true le fichier XML a été correctement créé, false sinon
 	 */
 	public static boolean telechargerListeEtudiants() {
 		
@@ -41,8 +44,6 @@ public class ListeEtudiants {
 		Element racine = new Element("etudiants");
 		org.jdom.Document document = new Document(racine);
 		
-		/*
-		Exemple pour enregistrer les étudiants dans le XML
 		
 		Element etudiant = new Element("etudiant");
 		racine.addContent(etudiant);
@@ -63,7 +64,7 @@ public class ListeEtudiants {
 			System.out.println("Erreur lors de l'enregistrement du fichier etudiants.xml");
 			System.out.println(e.getMessage());
 		}
-		*/
+		
 		
 		return true;
 	}
