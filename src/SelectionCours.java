@@ -130,9 +130,12 @@ public class SelectionCours extends JFrame {
 	}
 	
 	public void annuler(){
-		setVisible(false);
-		System.exit(0);
+		setVisible(false); 
+		
+		PageAccueil accueil = new PageAccueil();
+		accueil.setVisible(true);
 	}
+	
 	public void commencer(){
 		setVisible(false); 
 		

@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -17,6 +18,39 @@ import javax.swing.border.EmptyBorder;
 public class PageAccueil extends JFrame {
 
 	private JPanel contentPane;
+	
+	
+	/**
+	 * Lancement de l'application
+	 */
+	public static void main(String[] args) {
+		
+		
+		// Pour teste la lecture du fichier XML
+		ListeEtudiants.lireFichierXML("A");
+		
+		for(Etudiant e : ListeEtudiants.etudiants) {
+			System.out.println(e);
+		}
+		// Fin du test
+		
+		
+		
+		// On lance la fenêtre principale
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					System.out.println("Lancement du programme");
+					PageAccueil frame = new PageAccueil();
+					frame.setVisible(true);
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 
 	/**
 	 * Create the frame.
@@ -104,7 +138,7 @@ public class PageAccueil extends JFrame {
 		JOptionPane jop = new JOptionPane();
 		
 		// On télécharge la liste des étudiants depuis la base de données AGAP
-		if(!Main.telechargerListeEtudiants()) {
+		if(!ListeEtudiants.telechargerListeEtudiants()) {
 			message = "Erreur lors de la suppression du fichier XML. Veuillez recommencer.";
 		}
 		else {

@@ -8,44 +8,12 @@ import org.jdom.*;
 import org.jdom.input.*;
 import org.jdom.filter.*;
 
-public class Main {
+public class ListeEtudiants {
 	
 	/**
 	 * L'attribut 'etudiants' contient la liste des étudiants concernés par le contrôle de présence.
 	 */
 	protected static ArrayList<Etudiant> etudiants = new ArrayList<Etudiant>();
-	
-	
-	/**
-	 * Lancement de l'application
-	 */
-	public static void main(String[] args) {
-		
-		
-		// Pour teste la lecture du fichier XML
-		Main.lireFichierXML("A");
-		
-		for(Etudiant e : etudiants) {
-			System.out.println(e);
-		}
-		// Fin du test
-		
-		
-		
-		// On lance la fenêtre principale
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					System.out.println("Lancement du programme");
-					PageAccueil frame = new PageAccueil();
-					frame.setVisible(true);
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	
 	/**
