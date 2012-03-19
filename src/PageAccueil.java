@@ -1,12 +1,12 @@
+
+
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +26,7 @@ public class PageAccueil extends JFrame {
 	public PageAccueil() {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 350, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -38,9 +38,8 @@ public class PageAccueil extends JFrame {
 		Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		haut.add(Titre);
 		
-		// Gestion des deux boutons
+		// Gestio du bouton de depart de controle de presence
 		JPanel milieux = new JPanel();
-		milieux.setLayout(new GridLayout(2,0));
 		JButton controler = new JButton("Commencer le contrôle de présence");
 		controler.addMouseListener(new MouseAdapter() {
 			@Override
@@ -48,8 +47,6 @@ public class PageAccueil extends JFrame {
 				commencerControle();
 			}
 		});  
-		JPanel milieuxbas = new JPanel();
-		milieuxbas.setLayout(new FlowLayout()); 
 		
 		String boutonListe = "Télécharger la liste des étudiants";
 		File fichierXml = new File("etudiants.xml");
@@ -58,6 +55,7 @@ public class PageAccueil extends JFrame {
 			boutonListe = "Mettre à jour la liste des étudiants";
 		}
 		
+		//Gestion du bouton de mise a jour du fichier xml
 		JButton majEtu = new JButton(boutonListe);
 		majEtu.addMouseListener(new MouseAdapter() {
 			@Override
@@ -66,12 +64,39 @@ public class PageAccueil extends JFrame {
 			}
 		});
 		
-		milieux.add(majEtu);
-		milieux.add(controler);
-		milieux.add(majEtu);
+		//Gestion du bouton pour quitter
+				JButton quitter = new JButton("Quitter");
+				quitter.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						quitter();
+					}
+		});
+				
+				
+		Box boiteVerticale = Box.createVerticalBox();
+		boiteVerticale.add(Box.createGlue());
+			Box boiteHorizontale1= Box.createHorizontalBox();
+			boiteHorizontale1.add(Box.createGlue());
+			boiteHorizontale1.add(controler);
+			boiteHorizontale1.add(Box.createGlue());
+		boiteVerticale.add(boiteHorizontale1);
+			Box boiteHorizontale2= Box.createHorizontalBox();
+			boiteHorizontale2.add(Box.createGlue());
+			boiteHorizontale2.add(majEtu);
+			boiteHorizontale2.add(Box.createGlue());
+		boiteVerticale.add(boiteHorizontale2);
+			Box boiteHorizontale3= Box.createHorizontalBox();
+			boiteHorizontale3.add(Box.createGlue());
+			boiteHorizontale3.add(quitter);
+			boiteHorizontale3.add(Box.createGlue());
+			boiteVerticale.add(boiteHorizontale3);
+		boiteVerticale.add(Box.createGlue());
+		
+		
 
 		contentPane.add(haut, BorderLayout.NORTH);
-		contentPane.add(milieux, BorderLayout.CENTER);
+		contentPane.add(boiteVerticale, BorderLayout.CENTER);
 	}
 	
 	
@@ -105,5 +130,9 @@ public class PageAccueil extends JFrame {
 		jop.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
 		
 		this.repaint();
+	}
+	
+	public void quitter(){
+		System.exit(0);
 	}
 }

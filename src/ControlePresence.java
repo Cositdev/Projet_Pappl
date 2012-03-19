@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 
+
 public class ControlePresence extends JFrame {
 
 	private JPanel contentPane, panelDroite, panelGauche;
@@ -47,18 +48,15 @@ public class ControlePresence extends JFrame {
 	 * Création de la fenêtre de contrôle de présence
 	 */
 	public void majFenetre() {
-		
+		/*
+		 * creation de la fenetre
+		 */
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 300);
 		setResizable(true);
 		contentPane = new JPanel();
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
-		
-		Map<Object, ImageIcon> icons = new HashMap<Object, ImageIcon>();
-		icons.put("present", createImageListe(cheminCheck));
-		
 		
 		// Affichage du titre de la fenêtre
 		String labelTitre = "Contrôle de présence - " +
@@ -139,12 +137,12 @@ public class ControlePresence extends JFrame {
 		panelGauche = new JPanel();
 		panelGauche.setLayout(new BorderLayout());
 		
-		listeEtudiants = majListeEtudiants();
 
 		// create a cell renderer to add the appropriate icon
+		listeEtudiants = majListeEtudiants();
 
-		listeEtudiants.setCellRenderer(new MaListeEleves(icons));
-		
+		listeEtudiants.setCellRenderer(new MaListeEleves());
+
 
 		panelGauche.add(listeEtudiants, BorderLayout.CENTER);
 
@@ -187,7 +185,7 @@ public class ControlePresence extends JFrame {
 		
 		ImageIcon icone = createImageIcon(cheminImage);
 		
-		labelphotoEleve = new JLabel(icone, JLabel.CENTER);
+		labelphotoEleve.setIcon(icone);
 		
 	}
 	public void rechercheETUpdate() {
@@ -232,7 +230,7 @@ public class ControlePresence extends JFrame {
 			Image img = ImageIO.read(new File(path));
         	Image mieux = img.getScaledInstance(30, 30, 1);
         	retour.setImage(mieux);
-    		//System.out.println("on renvoie bien l'image");
+    		System.out.println("on renvoie bien l'image : " + path);
 
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
@@ -240,6 +238,11 @@ public class ControlePresence extends JFrame {
 		}
 		
 		return retour;
-
 	}
+	
+	public void setDernierEtudiant(Etudiant etu){
+		this.dernierEtudiant = etu;
+	}
+	
+	
 }

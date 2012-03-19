@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Map;
 
 import javax.swing.Box;
@@ -14,11 +16,13 @@ import javax.swing.JPanel;
 public class MaListeEleves extends DefaultListCellRenderer {
 
 	private String cheminCheck = "./img/check.png";
+	JLabel labelNom ;
+	JLabel labelImage;
+	Etudiant etudiant;
 
-	private Map<Object, ImageIcon> icons = null;
-
-	public MaListeEleves(Map<Object, ImageIcon> icons) {
-		this.icons = icons;
+	public MaListeEleves() {
+		labelImage = new JLabel();
+		labelNom = new JLabel();
 	}
 
 	@Override
@@ -26,30 +30,28 @@ public class MaListeEleves extends DefaultListCellRenderer {
 			int index, boolean isSelected, boolean cellHasFocus) {
 
 		// Get the renderer component from parent class
-		Etudiant etudiant = (Etudiant) value;
-
+		etudiant = (Etudiant) value;
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 
 		Box boiteHorizontale = Box.createHorizontalBox();
-		JLabel labelNom = (JLabel) super.getListCellRendererComponent(list,
+		labelNom= (JLabel) super.getListCellRendererComponent(list,
 																	  etudiant.getNom() + " " + etudiant.getPrenom(),
 																	  index,
 																	  isSelected,
 																	  cellHasFocus);
+		
 		labelNom.setPreferredSize(new Dimension(180, 20));
 		boiteHorizontale.add(labelNom);
 
-
 		if (etudiant.getPresent()) {
-			JLabel labelImage = new JLabel();
 			System.out.println(etudiant.getNom() + " est present(e)");
 
-			// ImageIcon icon = new
-			// ImageIcon(getClass().getResource("/img/check.png"));
+						
+			
 			ImageIcon icon = ControlePresence.createImageListe(cheminCheck);
-			labelImage.setIcon(icon);
 			labelImage.setText("Present");
+			labelImage.setIcon(icon);
 			labelImage.setPreferredSize(new Dimension(100, 20));
 
 			boiteHorizontale.add(labelImage);
@@ -59,8 +61,13 @@ public class MaListeEleves extends DefaultListCellRenderer {
 		boiteHorizontale.add(Box.createGlue());
 
 		panel.add(boiteHorizontale, BorderLayout.CENTER);
-
+		
 		return panel;
 	}
-
+	
+	
+	public void majDeLaPhoto(Etudiant etu){
+		Main.fenetreControle.setDernierEtudiant(etu);
+		Main.fenetreControle.majPhoto();
+	}
 }
