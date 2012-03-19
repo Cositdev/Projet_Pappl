@@ -1,6 +1,5 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -9,13 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,7 +21,6 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
-import javax.swing.plaf.metal.MetalIconFactory;
 
 public class ControlePresence extends JFrame {
 
@@ -37,27 +33,10 @@ public class ControlePresence extends JFrame {
 	
 	private JTextField textFieldInput;
 	private JSplitPane splitPane;
-
-	/**
-	 * Launch the application.
+	private JLabel labelphotoEleve ;
+	private JList listeEtudiants;
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ControlePresence frame = new ControlePresence();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-	*/
 
-	/**
-	 * Constructeur
-	 */
 	public ControlePresence() {
 		this.dernierEtudiant = null;
 		majFenetre();
@@ -100,19 +79,21 @@ public class ControlePresence extends JFrame {
 		boiteHorizontale1.add(Box.createGlue());
 		
 		String cheminImage = "";
-		
+		System.out.println("mise en place de la photo");
 		if(this.dernierEtudiant == null) {
+			System.out.println("le dernier etudiant est NULL");
 			cheminImage = this.cheminAnonyme;
 		}
 		else {
-			cheminImage = this.dernierEtudiant.getLienPhoto();
+			System.out.println("Hop, on change et on met celle de " + dernierEtudiant.getPrenom());
+			cheminImage = this.dernierEtudiant.getLienPhotoDisque();
 		}
 		
 		ImageIcon icone = createImageIcon(cheminImage);
 		
-		JLabel jlbLabel1 = new JLabel(icone, JLabel.CENTER);
-		jlbLabel1.setPreferredSize(new Dimension(100, 100));
-		boiteHorizontale1.add(jlbLabel1);
+		labelphotoEleve = new JLabel(icone, JLabel.CENTER);
+		labelphotoEleve.setPreferredSize(new Dimension(100, 100));
+		boiteHorizontale1.add(labelphotoEleve);
 		boiteHorizontale1.add(Box.createGlue());
 		
 		boiteVerticale.add(boiteHorizontale1);
@@ -158,7 +139,7 @@ public class ControlePresence extends JFrame {
 		panelGauche = new JPanel();
 		panelGauche.setLayout(new BorderLayout());
 		
-		JList listeEtudiants = majListeEtudiants();
+		listeEtudiants = majListeEtudiants();
 
 		// create a cell renderer to add the appropriate icon
 
@@ -167,7 +148,7 @@ public class ControlePresence extends JFrame {
 
 		panelGauche.add(listeEtudiants, BorderLayout.CENTER);
 
-		JSplitPane splitPane= new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+		splitPane= new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
 				panelGauche, panelDroite);
 		splitPane.setDividerLocation(300);
 
@@ -191,13 +172,30 @@ public class ControlePresence extends JFrame {
 		return liste;
 	}
 	
-	
+	public void majPhoto(){
+		String cheminImage = "";
+
+		System.out.println("mise en place de la photo");
+		if(this.dernierEtudiant == null) {
+			System.out.println("le dernier etudiant est NULL");
+			cheminImage = this.cheminAnonyme;
+		}
+		else {
+			System.out.println("Hop, on change et on met celle de " + dernierEtudiant.getPrenom() + ":" + dernierEtudiant.getLienPhotoDisque());
+			cheminImage = this.dernierEtudiant.getLienPhotoDisque();
+		}
+		
+		ImageIcon icone = createImageIcon(cheminImage);
+		
+		labelphotoEleve = new JLabel(icone, JLabel.CENTER);
+		
+	}
 	public void rechercheETUpdate() {
 		String myfareTrouve = textFieldInput.getText();
 		for (Etudiant etu : ListeEtudiants.etudiants) {
 			if (etu.getNumeroMifare().equals(myfareTrouve)) {
 				etu.setPresent(true);
-				this.dernierEtudiant = etu;
+				dernierEtudiant = etu;
 				/*System.out.println(myfareTrouve
 						+ " a ete considere comme present : c\'est "
 						+ etu.getNom());*/
@@ -205,6 +203,8 @@ public class ControlePresence extends JFrame {
 		}
 		textFieldInput.setText("");
 		majListeEtudiants();
+		this.majPhoto();
+
 		this.repaint();
 
 	}

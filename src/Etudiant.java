@@ -67,7 +67,9 @@ public class Etudiant {
 		return this.nom + " " + this.prenom + ", groupe : " + this.groupe + "\n" +
 				this.numeroEtudiant + " - " + this.numeroMifare + " - " + this.lienPhoto;
 	}
-	
+	public String getLienPhotoDisque(){
+		return  "./img/" + this.numeroEtudiant + ".jpg";
+	}
 	
 	public String getNom(){
 		return this.nom;
