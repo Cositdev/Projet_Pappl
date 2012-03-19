@@ -2,8 +2,10 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -118,9 +120,7 @@ public class ControlePresence extends JFrame {
 		boutonFinControle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				setVisible(false); 
-				FenetreListeAbsents fen = new FenetreListeAbsents(ListeEtudiants.etudiants);
-				fen.setVisible(true);
+				terminerControle();
 			}
 		});
 		
@@ -242,6 +242,19 @@ public class ControlePresence extends JFrame {
 	
 	public void setDernierEtudiant(Etudiant etu){
 		this.dernierEtudiant = etu;
+	}
+	
+	
+	/**
+	 * Terminer le contrôle de présence
+	 */
+	public void terminerControle() {
+		// On désactive la touche VERR MAJ
+		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, false);
+		
+		// On masque la fenêtre de contrôle et on affiche la fenêtre de vérification
+		Main.fenetreControle.setVisible(false);
+		Main.fenetreListeAbsents.setVisible(true);
 	}
 	
 	

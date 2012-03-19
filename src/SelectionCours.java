@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -161,6 +163,9 @@ public class SelectionCours extends JFrame {
 		
 		// On télécharge les photos des étudiants concernés
 		ListeEtudiants.telechargerPhotos();
+		
+		// On active la touche VERR MAJ (pour que le scan des cartes retourne des chiffres)
+		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, true);
 		
 		// On affiche la fenêtre de contrôle, on masque la fenêtre de séléction du cours
 		Main.fenetreSelectionCours.setVisible(false);
