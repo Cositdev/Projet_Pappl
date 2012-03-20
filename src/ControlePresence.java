@@ -133,6 +133,25 @@ public class ControlePresence extends JFrame {
 		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
 
 		
+		
+		Box boiteHorizontale4= Box.createHorizontalBox();
+		boiteHorizontale4.add(Box.createGlue());
+		JButton boutonRetour = new JButton("Retour");
+		boutonRetour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				retour();
+			}
+		});
+		
+		boiteHorizontale4.add(boutonRetour);
+		boiteHorizontale4.add(Box.createGlue());
+			
+		boiteVerticale.add(boiteHorizontale4);
+		
+		boiteVerticale.add(Box.createGlue());
+		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
+		
 		// Gestion de la partie gauche (liste des étudiants)
 		panelGauche = new JPanel();
 		panelGauche.setLayout(new BorderLayout());
@@ -255,6 +274,18 @@ public class ControlePresence extends JFrame {
 		// On masque la fenêtre de contrôle et on affiche la fenêtre de vérification
 		Main.fenetreControle.setVisible(false);
 		Main.fenetreListeAbsents.setVisible(true);
+	}
+	
+	/**
+	 * Retourner à la fenêtre de séléction du cours
+	 */
+	public void retour() {
+		// On désactive la touche VERR MAJ
+		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, false);
+		
+		// On masque la fenêtre de contrôle de présence, on affiche la fenêtre de séléction du cours
+		Main.fenetreControle.setVisible(false);
+		Main.fenetreSelectionCours.setVisible(true);
 	}
 	
 	

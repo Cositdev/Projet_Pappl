@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -20,16 +22,18 @@ import javax.swing.border.EmptyBorder;
 public class FenetreListeAbsents extends JFrame {
 
 	private JPanel contentPane;
-	private ArrayList<Etudiant> listeEtudiants;
+	// On utilise ListeEtudiant.etudiant
+	//private ArrayList<Etudiant> listeEtudiants;
 	private ArrayList<Etudiant> listeAbsents;
 	private JTextArea textAreaEtudiantsAbsents;
+	
 	/**
 	 * Create the frame.
 	 */
-	public void creerListeAbsents(){
+	public void creerListeAbsents() {
 		listeAbsents = new ArrayList<Etudiant>();
 		textAreaEtudiantsAbsents = new JTextArea();
-		for(Etudiant etu:listeEtudiants){
+		for(Etudiant etu : ListeEtudiants.etudiants){
 			if(!etu.getPresent()){
 				listeAbsents.add(etu);
 				textAreaEtudiantsAbsents.setText(textAreaEtudiantsAbsents.getText()+etu.getPrenom() + " " + etu.getNom()+ "\n");
@@ -76,8 +80,7 @@ public class FenetreListeAbsents extends JFrame {
 	boutonAnnuler.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			setVisible(false); 
-			System.exit(0);
+			retourControle();
 		}
 	});
 	JButton boutonEnvoyer = new JButton("Envoyer");
@@ -101,5 +104,17 @@ public class FenetreListeAbsents extends JFrame {
 		
 		jop.showMessageDialog(null,"Non implémenté pour le moment",
 				"Impossible", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	/**
+	 * Retour à la fenêtre de contrôle des présences
+	 */
+	public void retourControle() {
+		// On active la touche VERR MAJ
+		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, true);
+		
+		// On masque la fenêtre avec lal iste des absents, on affiche la fenêtre de contrôle de présence
+		Main.fenetreListeAbsents.setVisible(false);
+		Main.fenetreControle.setVisible(true);
 	}
 }

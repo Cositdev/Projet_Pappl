@@ -24,11 +24,6 @@ public class Etudiant {
 		this.numeroMifare = numeroMifare;
 		this.numeroEtudiant = numeroEtudiant;
 	}
-	public Etudiant(String nom, String numeroMifare){
-		this.nom = nom;
-		this.numeroMifare = numeroMifare;
-		this.present=false;
-	}
 	
 	
 	/**
