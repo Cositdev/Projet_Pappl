@@ -46,9 +46,8 @@ public class SelectionCours extends JFrame {
 		listeGroupes = new ArrayList<String>();
 		listeGroupes.add("A");
 		listeGroupes.add("B");
-		listeGroupes.add("C");
-		listeGroupes.add("EI3SIM");listeGroupes.add("EI3MATER");listeGroupes.add("EI3ENERG");
-		listeGroupes.add("EI3INFO");listeGroupes.add("EI3DPSI");listeGroupes.add("EI3ISIS");
+		listeGroupes.add("eOSINF");
+		listeGroupes.add("eIMAGE");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 349, 224);

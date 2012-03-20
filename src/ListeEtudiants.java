@@ -41,6 +41,7 @@ public class ListeEtudiants {
 		// ...
 		
 		// Création du fichier XML
+		/*
 		Element racine = new Element("etudiants");
 		org.jdom.Document document = new Document(racine);
 		
@@ -64,6 +65,7 @@ public class ListeEtudiants {
 			System.out.println("Erreur lors de l'enregistrement du fichier etudiants.xml");
 			System.out.println(e.getMessage());
 		}
+		*/
 		
 		
 		return true;
@@ -82,6 +84,8 @@ public class ListeEtudiants {
 		
 		SAXBuilder sxb = new SAXBuilder();
 		
+		etudiants = new ArrayList<Etudiant>();
+		
 		try {
 			document = sxb.build((new File("etudiants.xml")));
 		}
@@ -99,8 +103,12 @@ public class ListeEtudiants {
 				
 				Element element = (Element) objet;
 				
-				if(element.getChild("groupe").getTextTrim().equals(filtreGroupe)) {
-					return true;
+				List<Element> groupes = element.getChild("groupes").getChildren("groupe");
+				
+				for(Element e : groupes) {
+					if(e.getTextTrim().equals(filtreGroupe)) {
+						return true;
+					}
 				}
 				
 				return false;
