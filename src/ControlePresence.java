@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -140,7 +142,7 @@ public class ControlePresence extends JFrame {
 		boutonRetour.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				retour();
+				retourSelectionCours();
 			}
 		});
 		
@@ -279,14 +281,22 @@ public class ControlePresence extends JFrame {
 	/**
 	 * Retourner à la fenêtre de séléction du cours
 	 */
-	public void retour() {
-		// On désactive la touche VERR MAJ
-		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, false);
+	public void retourSelectionCours() {
+		// On affiche un message d'information
+		int choix = JOptionPane.showConfirmDialog((Component) null,
+												  "Toutes les données seront perdues ! Vous devrez scanner à nouveau tous les étudiants.",
+												  "Attention",
+												  JOptionPane.OK_CANCEL_OPTION);
+		System.out.println(choix);
 		
-		// On masque la fenêtre de contrôle de présence, on affiche la fenêtre de séléction du cours
-		Main.fenetreControle.setVisible(false);
-		Main.fenetreSelectionCours.setVisible(true);
+		if(choix == 0) {
+			// On désactive la touche VERR MAJ
+			Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, false);
+			
+			// On masque la fenêtre de contrôle de présence, on affiche la fenêtre de séléction du cours
+			Main.fenetreControle.setVisible(false);
+			Main.fenetreSelectionCours.setVisible(true);
+		}
 	}
-	
 	
 }

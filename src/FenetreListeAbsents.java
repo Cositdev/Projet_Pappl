@@ -23,7 +23,7 @@ public class FenetreListeAbsents extends JFrame {
 
 	private JPanel contentPane;
 	// On utilise ListeEtudiant.etudiant
-	//private ArrayList<Etudiant> listeEtudiants;
+	private ArrayList<Etudiant> listeEtudiants;
 	private ArrayList<Etudiant> listeAbsents;
 	private JTextArea textAreaEtudiantsAbsents;
 	
