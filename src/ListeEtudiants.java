@@ -1,6 +1,11 @@
 import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
@@ -27,7 +32,6 @@ public class ListeEtudiants {
 	 */
 	public static boolean telechargerListeEtudiants() {
 		
-		String message;
 		File fichierXml = new File("etudiants.xml");
 		
 		if(fichierXml.exists()) {
@@ -37,25 +41,119 @@ public class ListeEtudiants {
 			}
 		}
 		
-		// Connexion au serveur
-		// ...
-		
-		// Création du fichier XML
-		/*
+		// Début de la structure XML
 		Element racine = new Element("etudiants");
 		org.jdom.Document document = new Document(racine);
 		
+		// Chargement du driver Mysql
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		catch(java.lang.ClassNotFoundException e) {
+			System.err.print("ClassNotFoundException");
+			System.err.println(e.getMessage());
+		}
 		
-		Element etudiant = new Element("etudiant");
-		racine.addContent(etudiant);
+		// URL de la base de donnée
+		String url = "jdbc:mysql://localhost:3306/forumprepa";
 		
-		Element nom = new Element("nom");
-		nom.setText("Bugnet");
-		etudiant.addContent(nom);
-		
-		Element prenom = new Element("prenom");
-		prenom.setText("Guillaume");
-		etudiant.addContent(prenom);
+		try {
+			// Connexion à la base de données
+			Connection con = DriverManager.getConnection(url, "root", "");
+			
+			// Requête : liste des étudiants
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT nom, prenom, groupe, numeroMifare, numeroEtudiant, lienPhoto FROM etudiants");
+			
+			ArrayList<String> listeGroupes = new ArrayList<String>();
+			
+			rs.next();
+			
+			Etudiant etu = new Etudiant(rs.getString(1), rs.getString(2), "", rs.getString(6), rs.getString(4), rs.getString(5));
+			listeGroupes.add(rs.getString(3));
+			
+			
+			/* Un étudiant apparaît autant de fois que de groupes auquel il appartient.
+			 * Les lignes se suivent. Pour chaque résultat, on compare avec le résultat
+			 * précédent pour voir s'il s'agit du même étudiant.
+			 * On stocke les groupes dans l'ArrayList groupes */
+			while(rs.next()) {
+				if(rs.getString(4).equals(etu.getNumeroMifare())) {
+					// C'est le même étudiant, on ajoute le groupe
+					listeGroupes.add(rs.getString(3));
+				}
+				else {
+					// Ce n'est pas le même étudiant. On ajoute le précédent dans le fichier XML.
+					Element etudiant = new Element("etudiant");
+					racine.addContent(etudiant);
+					
+					Element nom = new Element("nom");
+					nom.setText(etu.getNom());
+					Element prenom = new Element("prenom");
+					prenom.setText(etu.getPrenom());
+					Element lienPhoto = new Element("lienPhoto");
+					lienPhoto.setText(etu.getLienPhoto());
+					Element numeroMifare = new Element("numeroMifare");
+					numeroMifare.setText(etu.getNumeroMifare());
+					Element numeroEtudiant = new Element("numeroEtudiant");
+					numeroEtudiant.setText(etu.getNumeroEtudiant());
+					
+					Element groupes = new Element("groupes");
+					for(String s : listeGroupes) {
+						Element groupe = new Element("groupe");
+						groupe.setText(s);
+						groupes.addContent(groupe);
+					}
+					
+					
+					etudiant.addContent(nom);
+					etudiant.addContent(prenom);
+					etudiant.addContent(groupes);
+					etudiant.addContent(lienPhoto);
+					etudiant.addContent(numeroMifare);
+					etudiant.addContent(numeroEtudiant);
+					
+					listeGroupes.clear();
+					
+					etu.setNom(rs.getString(1)); etu.setPrenom(rs.getString(2));
+					etu.setNumeroMifare(rs.getString(4)); etu.setNumeroEtudiant(rs.getString(5));
+					etu.setLienPhoto(rs.getString(6));
+					listeGroupes.add(rs.getString(3));
+				}
+			}
+			
+			// On ajoute le dernier étudiant au fichier XML
+			Element etudiant = new Element("etudiant");
+			racine.addContent(etudiant);
+			
+			Element nom = new Element("nom");
+			nom.setText(etu.getNom());
+			Element prenom = new Element("prenom");
+			prenom.setText(etu.getPrenom());
+			Element lienPhoto = new Element("lienPhoto");
+			lienPhoto.setText(etu.getLienPhoto());
+			Element numeroMifare = new Element("numeroMifare");
+			numeroMifare.setText(etu.getNumeroMifare());
+			Element numeroEtudiant = new Element("numeroEtudiant");
+			numeroEtudiant.setText(etu.getNumeroEtudiant());
+			
+			Element groupes = new Element("groupes");
+			for(String s : listeGroupes) {
+				Element groupe = new Element("groupe");
+				groupe.setText(s);
+				groupes.addContent(groupe);
+			}
+			
+			etudiant.addContent(nom);
+			etudiant.addContent(prenom);
+			etudiant.addContent(groupes);
+			etudiant.addContent(lienPhoto);
+			etudiant.addContent(numeroMifare);
+			etudiant.addContent(numeroEtudiant);
+		}
+		catch(SQLException ex) {
+			System.err.println("SQLException :" + ex.getMessage());
+		}
 		
 		try {
 			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
@@ -65,8 +163,6 @@ public class ListeEtudiants {
 			System.out.println("Erreur lors de l'enregistrement du fichier etudiants.xml");
 			System.out.println(e.getMessage());
 		}
-		*/
-		
 		
 		return true;
 	}

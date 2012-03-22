@@ -25,6 +25,10 @@ public class Etudiant {
 		this.numeroEtudiant = numeroEtudiant;
 	}
 	
+	public Etudiant() {
+		
+	}
+	
 	
 	/**
 	 * Télécharge la photo d'un étudiant
