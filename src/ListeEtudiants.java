@@ -18,10 +18,13 @@ import org.jdom.filter.*;
 
 public class ListeEtudiants {
 	
+	
 	/**
 	 * L'attribut 'etudiants' contient la liste des étudiants concernés par le contrôle de présence.
 	 */
 	protected static ArrayList<Etudiant> etudiants = new ArrayList<Etudiant>();
+	
+	
 	
 	
 	/**
@@ -34,8 +37,8 @@ public class ListeEtudiants {
 		
 		File fichierXml = new File("etudiants.xml");
 		
+		// On supprime le fichier XML s'il existe
 		if(fichierXml.exists()) {
-			// Il y a déjà un fichier XML, on le supprime
 			if(!fichierXml.delete()) {
 				return false;
 			}
@@ -83,35 +86,8 @@ public class ListeEtudiants {
 					listeGroupes.add(rs.getString(3));
 				}
 				else {
-					// Ce n'est pas le même étudiant. On ajoute le précédent dans le fichier XML.
-					Element etudiant = new Element("etudiant");
-					racine.addContent(etudiant);
-					
-					Element nom = new Element("nom");
-					nom.setText(etu.getNom());
-					Element prenom = new Element("prenom");
-					prenom.setText(etu.getPrenom());
-					Element lienPhoto = new Element("lienPhoto");
-					lienPhoto.setText(etu.getLienPhoto());
-					Element numeroMifare = new Element("numeroMifare");
-					numeroMifare.setText(etu.getNumeroMifare());
-					Element numeroEtudiant = new Element("numeroEtudiant");
-					numeroEtudiant.setText(etu.getNumeroEtudiant());
-					
-					Element groupes = new Element("groupes");
-					for(String s : listeGroupes) {
-						Element groupe = new Element("groupe");
-						groupe.setText(s);
-						groupes.addContent(groupe);
-					}
-					
-					
-					etudiant.addContent(nom);
-					etudiant.addContent(prenom);
-					etudiant.addContent(groupes);
-					etudiant.addContent(lienPhoto);
-					etudiant.addContent(numeroMifare);
-					etudiant.addContent(numeroEtudiant);
+					// Ce n'est pas le même étudiant. On ajoute le précédent étudiant dans le fichier XML.
+					ListeEtudiants.ajouterEtudiantXML(etu, listeGroupes, racine);
 					
 					listeGroupes.clear();
 					
@@ -123,33 +99,7 @@ public class ListeEtudiants {
 			}
 			
 			// On ajoute le dernier étudiant au fichier XML
-			Element etudiant = new Element("etudiant");
-			racine.addContent(etudiant);
-			
-			Element nom = new Element("nom");
-			nom.setText(etu.getNom());
-			Element prenom = new Element("prenom");
-			prenom.setText(etu.getPrenom());
-			Element lienPhoto = new Element("lienPhoto");
-			lienPhoto.setText(etu.getLienPhoto());
-			Element numeroMifare = new Element("numeroMifare");
-			numeroMifare.setText(etu.getNumeroMifare());
-			Element numeroEtudiant = new Element("numeroEtudiant");
-			numeroEtudiant.setText(etu.getNumeroEtudiant());
-			
-			Element groupes = new Element("groupes");
-			for(String s : listeGroupes) {
-				Element groupe = new Element("groupe");
-				groupe.setText(s);
-				groupes.addContent(groupe);
-			}
-			
-			etudiant.addContent(nom);
-			etudiant.addContent(prenom);
-			etudiant.addContent(groupes);
-			etudiant.addContent(lienPhoto);
-			etudiant.addContent(numeroMifare);
-			etudiant.addContent(numeroEtudiant);
+			ListeEtudiants.ajouterEtudiantXML(etu, listeGroupes, racine);
 		}
 		catch(SQLException ex) {
 			System.err.println("SQLException :" + ex.getMessage());
@@ -168,6 +118,8 @@ public class ListeEtudiants {
 	}
 	
 	
+	
+	
 	/**
 	 * Lit le fichier XML et stocke les informations dans l'attribut etudiants
 	 * @param String groupe : groupe 
@@ -180,7 +132,7 @@ public class ListeEtudiants {
 		
 		SAXBuilder sxb = new SAXBuilder();
 		
-		etudiants = new ArrayList<Etudiant>();
+		ListeEtudiants.etudiants = new ArrayList<Etudiant>();
 		
 		try {
 			document = sxb.build((new File("etudiants.xml")));
@@ -191,6 +143,7 @@ public class ListeEtudiants {
 		
 		racine = document.getRootElement();
 		
+		// Filtre en fonction du groupe
 		Filter filtre = new Filter() {
 			public boolean matches(Object objet) {
 				if(!(objet instanceof Element)) {
@@ -211,6 +164,7 @@ public class ListeEtudiants {
 			}
 		};
 		
+		// On récupère les résultats avec le filtre
 		List resultats = racine.getContent(filtre);
 		
 		Iterator i = resultats.iterator();
@@ -229,6 +183,48 @@ public class ListeEtudiants {
 		
 		return true;
 	}
+	
+	
+	
+	
+	/**
+	 * Ajoute un étudiant au fichier XML
+	 * @param etu : étudiant à ajouter au fichier XML
+	 * @param listeGroupes : groupes auquels appartient l'étudiant
+	 * @param racine : racine du fichier XML
+	 */
+	public static void ajouterEtudiantXML(Etudiant etu, ArrayList<String> listeGroupes, Element racine) {
+	
+		Element etudiant = new Element("etudiant");
+		racine.addContent(etudiant);
+		
+		Element nom = new Element("nom");
+		nom.setText(etu.getNom());
+		Element prenom = new Element("prenom");
+		prenom.setText(etu.getPrenom());
+		Element lienPhoto = new Element("lienPhoto");
+		lienPhoto.setText(etu.getLienPhoto());
+		Element numeroMifare = new Element("numeroMifare");
+		numeroMifare.setText(etu.getNumeroMifare());
+		Element numeroEtudiant = new Element("numeroEtudiant");
+		numeroEtudiant.setText(etu.getNumeroEtudiant());
+		
+		Element groupes = new Element("groupes");
+		for(String s : listeGroupes) {
+			Element groupe = new Element("groupe");
+			groupe.setText(s);
+			groupes.addContent(groupe);
+		}
+		
+		etudiant.addContent(nom);
+		etudiant.addContent(prenom);
+		etudiant.addContent(groupes);
+		etudiant.addContent(lienPhoto);
+		etudiant.addContent(numeroMifare);
+		etudiant.addContent(numeroEtudiant);
+	}
+	
+	
 	
 	
 	/**
