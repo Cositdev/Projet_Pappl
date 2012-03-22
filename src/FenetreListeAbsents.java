@@ -22,27 +22,34 @@ import javax.swing.border.EmptyBorder;
 public class FenetreListeAbsents extends JFrame {
 
 	private JPanel contentPane;
-	// On utilise ListeEtudiant.etudiant
 	private ArrayList<Etudiant> listeEtudiants;
 	private ArrayList<Etudiant> listeAbsents;
 	private JTextArea textAreaEtudiantsAbsents;
 	
+	
 	/**
-	 * Create the frame.
+	 * Création de la liste des absents
 	 */
 	public void creerListeAbsents() {
 		listeAbsents = new ArrayList<Etudiant>();
 		textAreaEtudiantsAbsents = new JTextArea();
-		for(Etudiant etu : ListeEtudiants.etudiants){
+		
+		// On parcours la liste des étudiants pour ajouter les absents
+		for(Etudiant etu : ListeEtudiants.etudiants) {
 			if(!etu.getPresent()){
 				listeAbsents.add(etu);
 				textAreaEtudiantsAbsents.setText(textAreaEtudiantsAbsents.getText()+etu.getPrenom() + " " + etu.getNom()+ "\n");
 			}
-			
 		}
 	}
 	
 	
+	
+	
+	/**
+	 * Création de la fenêtre
+	 * @param liste des étudiants du groupe concerné par le contrôle de présence
+	 */
 	public FenetreListeAbsents(ArrayList<Etudiant> listeEtudiants) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -50,7 +57,7 @@ public class FenetreListeAbsents extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		this.listeEtudiants=listeEtudiants;
+		this.listeEtudiants = listeEtudiants;
 		
 		creerListeAbsents();
 		

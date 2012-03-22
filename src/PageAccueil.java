@@ -19,6 +19,8 @@ public class PageAccueil extends JFrame {
 
 	private JPanel contentPane;
 	
+	
+	
 
 	/**
 	 * Création de la fenêtre
@@ -38,11 +40,10 @@ public class PageAccueil extends JFrame {
 		Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		haut.add(Titre);
 		
-		// Gestio du bouton de depart de controle de presence
+		// Gestion du bouton de lancement du contrôle de présence
 		JPanel milieux = new JPanel();
 		JButton controler = new JButton("Commencer le contrôle de présence");
 		controler.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				commencerControle();
 			}
@@ -100,14 +101,33 @@ public class PageAccueil extends JFrame {
 	}
 	
 	
+	
+	
+	/**
+	 * Lancement du contrôle de présence
+	 */
 	public void commencerControle() {
+		File fichierXml = new File("etudiants.xml");
 		
-		// On masque la fenêtre d'accueil, on affiche la fenêtre de séléction du cours
-		Main.fenetreAccueil.setVisible(false);
-		Main.fenetreSelectionCours.setVisible(true);
+		if(fichierXml.exists()) {
+			/* Le fichier XML existe, on commence le contrôle.
+			 * on masque la fenêtre d'accueil, on affiche la fenêtre de séléction du cours */
+			Main.fenetreAccueil.setVisible(false);
+			Main.fenetreSelectionCours.setVisible(true);
+		}
+		else {
+			/* Le fichier XML n'existe pas.
+			 * On ne peut pas commencer le contrôle */
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null,
+								  "Vous devez télécharger la liste des étudiants depuis la base de données AGAP avant de pouvoir lancer le contrôle de présence.",
+								  "Erreur",
+								  JOptionPane.ERROR_MESSAGE);
+		}
 		
-
 	}
+	
+	
 	
 	
 	/**
@@ -132,7 +152,10 @@ public class PageAccueil extends JFrame {
 		this.repaint();
 	}
 	
-	public void quitter(){
+	
+	
+	
+	public void quitter() {
 		System.exit(0);
 	}
 }
