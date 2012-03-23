@@ -24,11 +24,8 @@ public class Etudiant {
 		this.numeroMifare = numeroMifare;
 		this.numeroEtudiant = numeroEtudiant;
 	}
-	public Etudiant(String nom, String numeroMifare){
-		this.nom = nom;
-		this.numeroMifare = numeroMifare;
-		this.present=false;
-	}
+	
+	
 	
 	
 	/**
@@ -63,14 +60,26 @@ public class Etudiant {
 	}
 	
 	
+	
+	
 	public String toString() {
 		return this.nom + " " + this.prenom + ", groupe : " + this.groupe + "\n" +
 				this.numeroEtudiant + " - " + this.numeroMifare + " - " + this.lienPhoto;
 	}
+	
+	
+	
+	
 	public String getLienPhotoDisque(){
 		return  "./img/" + this.numeroEtudiant + ".jpg";
 	}
 	
+	
+	
+	
+	/*
+	 * Getters et Setters
+	 */
 	public String getNom(){
 		return this.nom;
 	}

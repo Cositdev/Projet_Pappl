@@ -7,11 +7,13 @@ public class Main {
 	
 	/**
 	 * Chaque fenêtre utilisée dans l'application est un attribut,
-	 * qui pourront être utilisés par toutes les classes
+	 * qui pourra être utilisé par toutes les classes
 	 */
 	protected static PageAccueil fenetreAccueil;
 	protected static SelectionCours fenetreSelectionCours;
 	protected static ControlePresence fenetreControle;
+	protected static FenetreListeAbsents fenetreListeAbsents;
+	
 	
 	
 	/**
@@ -23,10 +25,12 @@ public class Main {
 		fenetreAccueil = new PageAccueil();
 		fenetreSelectionCours = new SelectionCours();
 		fenetreControle = new ControlePresence();
+		fenetreListeAbsents = new FenetreListeAbsents(ListeEtudiants.etudiants);
 		
 		// On masque toutes les fenêtre sauf la fenêtre d'accueil
 		fenetreSelectionCours.setVisible(false);
 		fenetreControle.setVisible(false);
+		fenetreListeAbsents.setVisible(false);
 		fenetreAccueil.setVisible(true);
 	}
 

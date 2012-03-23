@@ -3,7 +3,10 @@
   <etudiant>
     <nom>Aunis</nom>
     <prenom>Jean</prenom>
-	<groupe>B</groupe>
+	<groupes>
+		<groupe>A</groupe>
+		<groupe>eOSINF</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/media.jpg</lienPhoto>
 	<numeroMifare>435621879645</numeroMifare>
 	<numeroEtudiant>45214Q</numeroEtudiant>
@@ -11,7 +14,10 @@
   <etudiant>
     <nom>Bro</nom>
     <prenom>Sébastien</prenom>
-	<groupe>B</groupe>
+	<groupes>
+		<groupe>B</groupe>
+		<groupe>eIMAGE</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/trez.jpg</lienPhoto>
 	<numeroMifare>4653217584</numeroMifare>
 	<numeroEtudiant>46895S</numeroEtudiant>
@@ -19,7 +25,10 @@
   <etudiant>
     <nom>Bugnet</nom>
     <prenom>Guillaume</prenom>
-	<groupe>A</groupe>
+	<groupes>
+		<groupe>A</groupe>
+		<groupe>eIMAGE</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/prez.jpg</lienPhoto>
 	<numeroMifare>3176300779</numeroMifare>
 	<numeroEtudiant>75412V</numeroEtudiant>
@@ -27,7 +36,10 @@
   <etudiant>
     <nom>Debon</nom>
     <prenom>Julien</prenom>
-	<groupe>A</groupe>
+	<groupes>
+		<groupe>B</groupe>
+		<groupe>eOSINF</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/communication.jpg</lienPhoto>
 	<numeroMifare>0341156636</numeroMifare>
 	<numeroEtudiant>01243S</numeroEtudiant>
@@ -35,7 +47,10 @@
   <etudiant>
     <nom>Laurent</nom>
     <prenom>Marc</prenom>
-	<groupe>B</groupe>
+	<groupes>
+		<groupe>B</groupe>
+		<groupe>eOSINF</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/relations_entreprises.jpg</lienPhoto>
 	<numeroMifare>465329867414</numeroMifare>
 	<numeroEtudiant>46132A</numeroEtudiant>
@@ -43,7 +58,10 @@
   <etudiant>
     <nom>Magnien</nom>
     <prenom>Bertrand</prenom>
-	<groupe>A</groupe>
+	<groupes>
+		<groupe>A</groupe>
+		<groupe>eIMAGE</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/vice_prez.jpg</lienPhoto>
 	<numeroMifare>3677794795</numeroMifare>
 	<numeroEtudiant>45632X</numeroEtudiant>
@@ -51,7 +69,10 @@
   <etudiant>
     <nom>Martin De la Haute Motte</nom>
     <prenom>Jean-Charles</prenom>
-	<groupe>C</groupe>
+	<groupes>
+		<groupe>B</groupe>
+		<groupe>eIMAGE</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/ateliers.jpg</lienPhoto>
 	<numeroMifare>789564313254</numeroMifare>
 	<numeroEtudiant>002134G</numeroEtudiant>
@@ -59,7 +80,10 @@
   <etudiant>
     <nom>Saison</nom>
     <prenom>Emilie</prenom>
-	<groupe>A</groupe>
+	<groupes>
+		<groupe>A</groupe>
+		<groupe>eIMAGE</groupe>
+	</groupes>
 	<lienPhoto>http://www.forumatlantique.info/img/trombi/logistique.jpg</lienPhoto>
 	<numeroMifare>10002345414</numeroMifare>
 	<numeroEtudiant>478500R</numeroEtudiant>

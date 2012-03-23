@@ -1,9 +1,12 @@
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -18,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
@@ -118,9 +122,7 @@ public class ControlePresence extends JFrame {
 		boutonFinControle.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				setVisible(false); 
-				FenetreListeAbsents fen = new FenetreListeAbsents(ListeEtudiants.etudiants);
-				fen.setVisible(true);
+				terminerControle();
 			}
 		});
 		
@@ -132,6 +134,25 @@ public class ControlePresence extends JFrame {
 		boiteVerticale.add(Box.createGlue());
 		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
 
+		
+		
+		Box boiteHorizontale4= Box.createHorizontalBox();
+		boiteHorizontale4.add(Box.createGlue());
+		JButton boutonRetour = new JButton("Retour");
+		boutonRetour.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				retourSelectionCours();
+			}
+		});
+		
+		boiteHorizontale4.add(boutonRetour);
+		boiteHorizontale4.add(Box.createGlue());
+			
+		boiteVerticale.add(boiteHorizontale4);
+		
+		boiteVerticale.add(Box.createGlue());
+		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
 		
 		// Gestion de la partie gauche (liste des étudiants)
 		panelGauche = new JPanel();
@@ -244,5 +265,38 @@ public class ControlePresence extends JFrame {
 		this.dernierEtudiant = etu;
 	}
 	
+	
+	/**
+	 * Terminer le contrôle de présence
+	 */
+	public void terminerControle() {
+		// On désactive la touche VERR MAJ
+		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, false);
+		
+		// On masque la fenêtre de contrôle et on affiche la fenêtre de vérification
+		Main.fenetreControle.setVisible(false);
+		Main.fenetreListeAbsents.setVisible(true);
+	}
+	
+	/**
+	 * Retourner à la fenêtre de séléction du cours
+	 */
+	public void retourSelectionCours() {
+		// On affiche un message d'information
+		int choix = JOptionPane.showConfirmDialog((Component) null,
+												  "Toutes les données seront perdues ! Vous devrez scanner à nouveau tous les étudiants.",
+												  "Attention",
+												  JOptionPane.OK_CANCEL_OPTION);
+		System.out.println(choix);
+		
+		if(choix == 0) {
+			// On désactive la touche VERR MAJ
+			Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, false);
+			
+			// On masque la fenêtre de contrôle de présence, on affiche la fenêtre de séléction du cours
+			Main.fenetreControle.setVisible(false);
+			Main.fenetreSelectionCours.setVisible(true);
+		}
+	}
 	
 }

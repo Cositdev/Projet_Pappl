@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -44,9 +46,8 @@ public class SelectionCours extends JFrame {
 		listeGroupes = new ArrayList<String>();
 		listeGroupes.add("A");
 		listeGroupes.add("B");
-		listeGroupes.add("C");
-		listeGroupes.add("EI3SIM");listeGroupes.add("EI3MATER");listeGroupes.add("EI3ENERG");
-		listeGroupes.add("EI3INFO");listeGroupes.add("EI3DPSI");listeGroupes.add("EI3ISIS");
+		listeGroupes.add("eOSINF");
+		listeGroupes.add("eIMAGE");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 349, 224);
@@ -161,6 +162,9 @@ public class SelectionCours extends JFrame {
 		
 		// On télécharge les photos des étudiants concernés
 		ListeEtudiants.telechargerPhotos();
+		
+		// On active la touche VERR MAJ (pour que le scan des cartes retourne des chiffres)
+		Toolkit.getDefaultToolkit().setLockingKeyState(KeyEvent.VK_CAPS_LOCK, true);
 		
 		// On affiche la fenêtre de contrôle, on masque la fenêtre de séléction du cours
 		Main.fenetreSelectionCours.setVisible(false);

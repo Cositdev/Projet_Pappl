@@ -24,10 +24,9 @@ public class MaListeEleves extends DefaultListCellRenderer {
 		labelImage = new JLabel();
 		labelNom = new JLabel();
 	}
-
-	@Override
-	public Component getListCellRendererComponent(JList list, Object value,
-			int index, boolean isSelected, boolean cellHasFocus) {
+	
+	
+	public Component getListCellRendererComponent(JList list, Object value,	int index, boolean isSelected, boolean cellHasFocus) {
 
 		// Get the renderer component from parent class
 		etudiant = (Etudiant) value;
@@ -36,18 +35,15 @@ public class MaListeEleves extends DefaultListCellRenderer {
 
 		Box boiteHorizontale = Box.createHorizontalBox();
 		labelNom= (JLabel) super.getListCellRendererComponent(list,
-																	  etudiant.getNom() + " " + etudiant.getPrenom(),
-																	  index,
-																	  isSelected,
-																	  cellHasFocus);
-		
+															  etudiant.getNom() + " " + etudiant.getPrenom(),
+															  index,
+															  isSelected,
+															  cellHasFocus);
 		labelNom.setPreferredSize(new Dimension(180, 20));
 		boiteHorizontale.add(labelNom);
 
 		if (etudiant.getPresent()) {
 			System.out.println(etudiant.getNom() + " est present(e)");
-
-						
 			
 			ImageIcon icon = ControlePresence.createImageListe(cheminCheck);
 			labelImage.setText("Present");
@@ -55,7 +51,6 @@ public class MaListeEleves extends DefaultListCellRenderer {
 			labelImage.setPreferredSize(new Dimension(100, 20));
 
 			boiteHorizontale.add(labelImage);
-
 		}
 
 		boiteHorizontale.add(Box.createGlue());
@@ -66,7 +61,7 @@ public class MaListeEleves extends DefaultListCellRenderer {
 	}
 	
 	
-	public void majDeLaPhoto(Etudiant etu){
+	public void majDeLaPhoto(Etudiant etu) {
 		Main.fenetreControle.setDernierEtudiant(etu);
 		Main.fenetreControle.majPhoto();
 	}
