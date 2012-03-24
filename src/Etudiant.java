@@ -11,18 +11,17 @@ public class Etudiant {
 	protected String nom;
 	protected String prenom;
 	protected String groupe;
-	protected String lienPhoto;
 	protected String numeroMifare;
 	protected String numeroEtudiant;
+	protected static String urlPhoto = "http://agap.ec-nantes.fr/AGAP/Photo/";
 	protected Boolean present = false;
 	
 	
 	
-	public Etudiant(String nom, String prenom, String groupe, String lienPhoto, String numeroMifare, String numeroEtudiant) {
+	public Etudiant(String nom, String prenom, String groupe, String numeroMifare, String numeroEtudiant) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.groupe = groupe;
-		this.lienPhoto = lienPhoto;
 		this.numeroMifare = numeroMifare;
 		this.numeroEtudiant = numeroEtudiant;
 	}
@@ -35,7 +34,7 @@ public class Etudiant {
 	 */
 	public boolean telechargerPhoto() {
 		try {
-			URL adresse = new URL(this.lienPhoto);
+			URL adresse = new URL(Etudiant.urlPhoto + this.numeroEtudiant + ".jpg");
 			File photo = new File("img/" + this.numeroEtudiant + ".jpg");
 			
 			if(!photo.exists()) {
@@ -87,12 +86,6 @@ public class Etudiant {
 	}
 	public void setGroupe(String groupe) {
 		this.groupe = groupe;
-	}
-	public String getLienPhoto() {
-		return lienPhoto;
-	}
-	public void setLienPhoto(String lienPhoto) {
-		this.lienPhoto = lienPhoto;
 	}
 	public String getNumeroMifare() {
 		return numeroMifare;
