@@ -1,5 +1,3 @@
-
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
@@ -34,6 +32,7 @@ public class SelectionCours extends JFrame {
 	 */
 	public SelectionCours() {
 		
+		// Liste des matières
 		listeMatieres = new ArrayList<String>();
 		listeMatieres.add("ANUME");listeMatieres.add("EZEZE");listeMatieres.add("FGDFS");listeMatieres.add("VCXV");
 		listeMatieres.add("SRETI");listeMatieres.add("PATAT1");listeMatieres.add("PATAT6");listeMatieres.add("VCXVV");
@@ -43,11 +42,13 @@ public class SelectionCours extends JFrame {
 		listeMatieres.add("PATAT");listeMatieres.add("PATAT5");listeMatieres.add("PATAT0");listeMatieres.add("PATATQ");
 		
 		
+		// Liste des groupes
 		listeGroupes = new ArrayList<String>();
 		listeGroupes.add("A");
 		listeGroupes.add("B");
 		listeGroupes.add("eOSINF");
 		listeGroupes.add("eIMAGE");
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 349, 224);
@@ -56,17 +57,17 @@ public class SelectionCours extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		//Gestion du titre
+		// Titre de la fenêtre
 		JPanel haut = new JPanel();
 		JLabel Titre = new JLabel("Selection d\'un cours");
 		Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		haut.add(Titre);
-
-		//Gestion du milieu
+		
+		// Milieu de la fenêtre
 		JPanel milieux = new JPanel();
 		milieux.setLayout(new GridLayout(3,0));
-			
-		//Gestion du milieu 1
+		
+		// Liste déroulante des matières
 		JPanel milieux1 = new JPanel();
 		milieux1.setLayout(new FlowLayout());
 		JLabel jlMatiere = new JLabel("Sélectionnez la matière");
@@ -76,7 +77,7 @@ public class SelectionCours extends JFrame {
 		milieux1.add(jcMatiere);
 		milieux.add(milieux1);
 		
-		//Gestion du milieu 2
+		// Liste déroulante des groupes
 		JPanel milieux2 = new JPanel();
 		milieux2.setLayout(new FlowLayout());
 		JLabel jlgroupe = new JLabel("Sélectionnez le groupe");
@@ -84,10 +85,10 @@ public class SelectionCours extends JFrame {
 		remplireComboGroupe();
 		milieux2.add(jlgroupe);
 		milieux2.add(jcGroupe);
-			
+		
 		milieux.add(milieux2);
-			
-		//Gestion du milieu 3
+		
+		// Date
 		JPanel milieux3 = new JPanel();
 		milieux3.setLayout(new FlowLayout());
 		JLabel jlDate1 = new JLabel("Date");
@@ -96,43 +97,50 @@ public class SelectionCours extends JFrame {
 		milieux3.add(jlDate2);
 		
 		milieux.add(milieux3);
-
+		
+		// Bouton valider
 		JPanel bas = new JPanel();
 		bas.setLayout(new FlowLayout());
 		JButton validerChoix = new JButton("Valider");
 		validerChoix.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				commencer();
 			}
 		});
-
+		
+		// Bouton retour
 		JButton retour = new JButton("Retour");
 		retour.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				annuler();
 			}
 		});
+		
+		
 		bas.add(retour);
 		bas.add(validerChoix);
 
 		contentPane.add(haut, BorderLayout.NORTH);
 		contentPane.add(milieux, BorderLayout.CENTER);
 		contentPane.add(bas,BorderLayout.SOUTH);
-
 	}
-
+	
+	
+	
 	public void remplireComboMatiere() {
 		for(String s : listeMatieres) {
 			jcMatiere.addItem(s);
 		}
 	}
+	
+	
+	
 	public void remplireComboGroupe() {
 		for(String s : listeGroupes) {
 			jcGroupe.addItem(s);
 		}
 	}
+	
 	
 	
 	/**
@@ -143,6 +151,7 @@ public class SelectionCours extends JFrame {
 		Main.fenetreSelectionCours.setVisible(false);
 		Main.fenetreAccueil.setVisible(true);
 	}
+	
 	
 	
 	/**

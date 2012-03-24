@@ -16,6 +16,8 @@ public class Etudiant {
 	protected String numeroEtudiant;
 	protected Boolean present = false;
 	
+	
+	
 	public Etudiant(String nom, String prenom, String groupe, String lienPhoto, String numeroMifare, String numeroEtudiant) {
 		this.nom = nom;
 		this.prenom = prenom;
@@ -24,7 +26,6 @@ public class Etudiant {
 		this.numeroMifare = numeroMifare;
 		this.numeroEtudiant = numeroEtudiant;
 	}
-	
 	
 	
 	
@@ -43,9 +44,11 @@ public class Etudiant {
 				BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream("img/" + this.numeroEtudiant + ".jpg"));
 				byte[] read = new byte[1];
 				int len = 1;
+				
 				while ((len = in.read(read)) > 0) {
 					out.write(read, 0, len);
 				}
+				
 				out.flush();
 				out.close();
 				in.close();
@@ -61,19 +64,9 @@ public class Etudiant {
 	
 	
 	
-	
-	public String toString() {
-		return this.nom + " " + this.prenom + ", groupe : " + this.groupe + "\n" +
-				this.numeroEtudiant + " - " + this.numeroMifare + " - " + this.lienPhoto;
-	}
-	
-	
-	
-	
 	public String getLienPhotoDisque(){
 		return  "./img/" + this.numeroEtudiant + ".jpg";
 	}
-	
 	
 	
 	

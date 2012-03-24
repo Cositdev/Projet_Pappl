@@ -14,25 +14,26 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 public class MaListeEleves extends DefaultListCellRenderer {
-
-	private String cheminCheck = "./img/check.png";
-	JLabel labelNom ;
-	JLabel labelImage;
-	Etudiant etudiant;
-
+	
+	private JLabel labelNom ;
+	private JLabel labelImage;
+	private Etudiant etudiant;
+	
+	
+	
 	public MaListeEleves() {
 		labelImage = new JLabel();
 		labelNom = new JLabel();
 	}
 	
 	
+	
 	public Component getListCellRendererComponent(JList list, Object value,	int index, boolean isSelected, boolean cellHasFocus) {
-
-		// Get the renderer component from parent class
+		
 		etudiant = (Etudiant) value;
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-
+		
 		Box boiteHorizontale = Box.createHorizontalBox();
 		labelNom= (JLabel) super.getListCellRendererComponent(list,
 															  etudiant.getNom() + " " + etudiant.getPrenom(),
@@ -41,11 +42,12 @@ public class MaListeEleves extends DefaultListCellRenderer {
 															  cellHasFocus);
 		labelNom.setPreferredSize(new Dimension(180, 20));
 		boiteHorizontale.add(labelNom);
-
+		
+		// On affiche "présent" si l'étudiant est présent
 		if (etudiant.getPresent()) {
 			System.out.println(etudiant.getNom() + " est present(e)");
 			
-			ImageIcon icon = ControlePresence.createImageListe(cheminCheck);
+			ImageIcon icon = ControlePresence.createImageListe("./img/check.png");
 			labelImage.setText("Present");
 			labelImage.setIcon(icon);
 			labelImage.setPreferredSize(new Dimension(100, 20));

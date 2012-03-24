@@ -26,7 +26,6 @@ public class ListeEtudiants {
 	
 	
 	
-	
 	/**
 	 * Télécharge la liste des étudiants depuis la base de données AGAP, et
 	 * sauvegarde les données dans un fichier XML (etudiants.xml)
