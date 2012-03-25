@@ -11,8 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -32,8 +30,7 @@ public class ControlePresence extends JFrame {
 	private JPanel contentPane, panelDroite, panelGauche;
 
 	private String cheminAnonyme = "./img/anonyme.jpg";
-	private String cheminCheck = "./img/check.png";
-	
+
 	private Etudiant dernierEtudiant;
 	
 	private JTextField textFieldInput;
@@ -235,23 +232,6 @@ public class ControlePresence extends JFrame {
 				e1.printStackTrace();
 			}
 			return retour;
-	}
-	
-	
-	
-	public static ImageIcon createImageListe(String path) {
-		ImageIcon retour = new ImageIcon() ;
-		
-		try {
-			Image img = ImageIO.read(new File(path));
-        	Image mieux = img.getScaledInstance(30, 30, 1);
-        	retour.setImage(mieux);
-
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		
-		return retour;
 	}
 	
 	
