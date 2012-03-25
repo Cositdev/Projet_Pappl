@@ -34,20 +34,16 @@ public class SelectionCours extends JFrame {
 		
 		// Liste des matières
 		listeMatieres = new ArrayList<String>();
-		listeMatieres.add("ANUME");listeMatieres.add("EZEZE");listeMatieres.add("FGDFS");listeMatieres.add("VCXV");
-		listeMatieres.add("SRETI");listeMatieres.add("PATAT1");listeMatieres.add("PATAT6");listeMatieres.add("VCXVV");
-		listeMatieres.add("COPIN");listeMatieres.add("PATAT2");listeMatieres.add("PATAT7");listeMatieres.add("UYUTR");
-		listeMatieres.add("GELOL");listeMatieres.add("PATAT3");listeMatieres.add("PATAT8");listeMatieres.add("PATATH");
-		listeMatieres.add("MESTR");listeMatieres.add("PATAT4");listeMatieres.add("PATAT9");listeMatieres.add("PATATZ");
-		listeMatieres.add("PATAT");listeMatieres.add("PATAT5");listeMatieres.add("PATAT0");listeMatieres.add("PATATQ");
+		listeMatieres.add("SRETI");listeMatieres.add("OBJET");listeMatieres.add("GELOL");listeMatieres.add("SRETI");
+		listeMatieres.add("BDONN");listeMatieres.add("QLOGI");listeMatieres.add("TREEL");listeMatieres.add("GRAFI");
 		
 		
 		// Liste des groupes
 		listeGroupes = new ArrayList<String>();
-		listeGroupes.add("A");
-		listeGroupes.add("B");
-		listeGroupes.add("eOSINF");
-		listeGroupes.add("eIMAGE");
+		listeGroupes.add("EI3INFO");
+		listeGroupes.add("EI3ISIS");
+		listeGroupes.add("EI3INFO-SI");
+		listeGroupes.add("EI3INFO-GI");
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
