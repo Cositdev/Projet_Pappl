@@ -45,7 +45,6 @@ public class MaListeEleves extends DefaultListCellRenderer {
 		
 		// On affiche "présent" si l'étudiant est présent
 		if (etudiant.getPresent()) {
-			System.out.println(etudiant.getNom() + " est present(e)");
 			
 			ImageIcon icon = ControlePresence.createImageListe("./img/check.png");
 			labelImage.setText("Present");

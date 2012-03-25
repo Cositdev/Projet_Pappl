@@ -61,9 +61,6 @@ public class ListeEtudiants {
 		}
 		
 		
-		// URL de la base de donnée
-		String url = "jdbc:mysql://localhost:3306/forumprepa";
-		
 		try {
 			// Connexion à la base de données
 			Properties prop = new Properties();
@@ -77,13 +74,11 @@ public class ListeEtudiants {
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM etudiants WHERE cycle_libelle='2011-2012' ORDER BY personne_nom");
 			
-			ArrayList<String> listeGroupes = new ArrayList<String>();
-			
 			// On ajoute chaque étudiant au fichier XML
 			while(rs.next()) {
 				Etudiant etu = new Etudiant(rs.getString(1), rs.getString(2), "", rs.getString(5), rs.getString(4));
 				
-				ListeEtudiants.ajouterEtudiantXML(etu, listeGroupes, racine);
+				ListeEtudiants.ajouterEtudiantXML(etu, racine);
 			}
 			
 			try {
@@ -187,7 +182,7 @@ public class ListeEtudiants {
 	 * @param listeGroupes : groupes auquels appartient l'étudiant
 	 * @param racine : racine du fichier XML
 	 */
-	public static void ajouterEtudiantXML(Etudiant etu, ArrayList<String> listeGroupes, Element racine) {
+	public static void ajouterEtudiantXML(Etudiant etu, Element racine) {
 	
 		Element etudiant = new Element("etudiant");
 		racine.addContent(etudiant);
@@ -200,13 +195,7 @@ public class ListeEtudiants {
 		numeroMifare.setText(etu.getNumeroMifare());
 		Element numeroEtudiant = new Element("numeroEtudiant");
 		numeroEtudiant.setText(etu.getNumeroEtudiant());
-		
 		Element groupes = new Element("groupes");
-		for(String s : listeGroupes) {
-			Element groupe = new Element("groupe");
-			groupe.setText(s);
-			groupes.addContent(groupe);
-		}
 		
 		etudiant.addContent(nom);
 		etudiant.addContent(prenom);

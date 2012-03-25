@@ -162,10 +162,6 @@ public class SelectionCours extends JFrame {
 		matiereChoisie = (String) jcMatiere.getSelectedItem();
 		groupeChoisi = (String) jcGroupe.getSelectedItem();
 		
-		System.out.println(SelectionCours.matiereChoisie);
-		System.out.println(matiereChoisie);
-		System.out.println(SelectionCours.getMatiereChoisie());
-		
 		// On récupère la liste des étudiants du groupe choisi dans le fichier XML
 		ListeEtudiants.lireFichierXML(groupeChoisi);
 		

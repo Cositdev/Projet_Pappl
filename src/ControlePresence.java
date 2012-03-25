@@ -285,7 +285,6 @@ public class ControlePresence extends JFrame {
 												  "Toutes les données seront perdues ! Vous devrez scanner à nouveau tous les étudiants.",
 												  "Attention",
 												  JOptionPane.OK_CANCEL_OPTION);
-		System.out.println(choix);
 		
 		if(choix == 0) {
 			// On désactive la touche VERR MAJ
