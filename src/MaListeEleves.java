@@ -1,14 +1,9 @@
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.Map;
 
 import javax.swing.Box;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -46,9 +41,7 @@ public class MaListeEleves extends DefaultListCellRenderer {
 		// On affiche "présent" si l'étudiant est présent
 		if (etudiant.getPresent()) {
 			
-			ImageIcon icon = ControlePresence.createImageListe("./img/check.png");
 			labelImage.setText("Present");
-			labelImage.setIcon(icon);
 			labelImage.setPreferredSize(new Dimension(100, 20));
 
 			boiteHorizontale.add(labelImage);

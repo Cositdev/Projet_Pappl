@@ -1,4 +1,3 @@
-import java.awt.EventQueue;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.sql.Connection;
@@ -7,17 +6,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
-import org.jdom.*;
-import org.jdom.input.*;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.filter.Filter;
+import org.jdom.input.SAXBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
-import org.jdom.filter.*;
 
 public class ListeEtudiants {
 	
