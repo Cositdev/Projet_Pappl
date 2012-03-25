@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
@@ -70,9 +71,17 @@ public class ListeEtudiants {
 			prop.put("characterEncoding", "utf-8");
 			Connection con = DriverManager.getConnection("jdbc:postgresql://agapbd.ec-nantes.fr/AGAPTest", prop);
 			
+			// Année scolaire
+			int annee = Calendar.getInstance().get(Calendar.YEAR);
+			if(Calendar.getInstance().get(Calendar.MONTH) > 9) {
+				annee ++;
+			}
+			
+			String libelleCycle = (annee - 1) + "-" + (annee);
+			
 			// Requête : liste des étudiants
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM etudiants WHERE cycle_libelle='2011-2012' ORDER BY personne_nom");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM etudiants WHERE cycle_libelle='" + libelleCycle + "' ORDER BY personne_nom");
 			
 			// On ajoute chaque étudiant au fichier XML
 			while(rs.next()) {
