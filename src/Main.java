@@ -23,7 +23,7 @@ public class Main {
 		fenetreAccueil = new PageAccueil();
 		fenetreSelectionCours = new SelectionCours();
 		fenetreControle = new ControlePresence();
-		fenetreListeAbsents = new FenetreListeAbsents(ListeEtudiants.etudiants);
+		fenetreListeAbsents = new FenetreListeAbsents();
 		
 		// On masque toutes les fenêtre sauf la fenêtre d'accueil
 		fenetreSelectionCours.setVisible(false);
