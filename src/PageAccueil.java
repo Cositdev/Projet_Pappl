@@ -18,7 +18,8 @@ import javax.swing.border.EmptyBorder;
 public class PageAccueil extends JFrame {
 
 	private JPanel contentPane;
-	
+	private JButton majEtudiant;
+	private String boutonTelechargement;
 	
 	
 
@@ -34,11 +35,13 @@ public class PageAccueil extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
+		
 		// Affichage du titre
 		JPanel haut = new JPanel();
 		JLabel Titre = new JLabel("Contrôle de présence");
 		Titre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		haut.add(Titre);
+		
 		
 		// Gestion du bouton de lancement du contrôle de présence
 		JPanel milieux = new JPanel();
@@ -49,29 +52,29 @@ public class PageAccueil extends JFrame {
 			}
 		});  
 		
-		String boutonListe = "Télécharger la liste des étudiants";
+		
+		//Gestion du bouton de mise a jour du fichier xml
+		boutonTelechargement = "Télécharger la liste des étudiants";
 		File fichierXml = new File("etudiants.xml");
 		
 		if(fichierXml.exists()) {
-			boutonListe = "Mettre à jour la liste des étudiants";
+			boutonTelechargement = "Mettre à jour la liste des étudiants";
 		}
 		
-		//Gestion du bouton de mise a jour du fichier xml
-		JButton majEtu = new JButton(boutonListe);
-		majEtu.addMouseListener(new MouseAdapter() {
-			@Override
+		majEtudiant = new JButton(boutonTelechargement);
+		majEtudiant.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent arg0) {
 				telechargerListeEtudiants();
 			}
 		});
 		
+		
 		//Gestion du bouton pour quitter
-				JButton quitter = new JButton("Quitter");
-				quitter.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent arg0) {
-						quitter();
-					}
+		JButton quitter = new JButton("Quitter");
+		quitter.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				quitter();
+			}
 		});
 				
 				
@@ -84,16 +87,15 @@ public class PageAccueil extends JFrame {
 		boiteVerticale.add(boiteHorizontale1);
 			Box boiteHorizontale2= Box.createHorizontalBox();
 			boiteHorizontale2.add(Box.createGlue());
-			boiteHorizontale2.add(majEtu);
+			boiteHorizontale2.add(majEtudiant);
 			boiteHorizontale2.add(Box.createGlue());
 		boiteVerticale.add(boiteHorizontale2);
 			Box boiteHorizontale3= Box.createHorizontalBox();
 			boiteHorizontale3.add(Box.createGlue());
 			boiteHorizontale3.add(quitter);
 			boiteHorizontale3.add(Box.createGlue());
-			boiteVerticale.add(boiteHorizontale3);
+		boiteVerticale.add(boiteHorizontale3);
 		boiteVerticale.add(Box.createGlue());
-		
 		
 
 		contentPane.add(haut, BorderLayout.NORTH);
@@ -144,6 +146,7 @@ public class PageAccueil extends JFrame {
 		}
 		else {
 			message = "La liste des étudiants a bien été mise à jour !";
+			majEtudiant.setText("Mettre à jour la liste des étudiants");
 		}
 		
 		// Message d'information

@@ -41,7 +41,8 @@ public class ControlePresence extends JFrame {
 	private JLabel labelphotoEleve ;
 	private JList listeEtudiants;
 	
-
+	
+	
 	public ControlePresence() {
 		this.dernierEtudiant = null;
 		majFenetre();
@@ -52,9 +53,7 @@ public class ControlePresence extends JFrame {
 	 * Création de la fenêtre de contrôle de présence
 	 */
 	public void majFenetre() {
-		/*
-		 * creation de la fenetre
-		 */
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 550, 300);
 		setResizable(true);
@@ -62,11 +61,11 @@ public class ControlePresence extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		
+		
 		// Affichage du titre de la fenêtre
 		String labelTitre = "Contrôle de présence - " +
 							SelectionCours.getMatiereChoisie() + " - " +
 							SelectionCours.getGroupeChoisi();
-		JPanel haut = new JPanel();
 		JLabel titreFenetre = new JLabel(labelTitre);
 		titreFenetre.setFont(new Font("Tw Cen MT Condensed Extra Bold", Font.PLAIN, 17));
 		
@@ -81,17 +80,17 @@ public class ControlePresence extends JFrame {
 		boiteHorizontale1.add(Box.createGlue());
 		
 		String cheminImage = "";
-		System.out.println("mise en place de la photo");
+		
+		// Affichage de la photo
 		if(this.dernierEtudiant == null) {
-			System.out.println("le dernier etudiant est NULL");
 			cheminImage = this.cheminAnonyme;
 		}
 		else {
-			System.out.println("Hop, on change et on met celle de " + dernierEtudiant.getPrenom());
 			cheminImage = this.dernierEtudiant.getLienPhotoDisque();
 		}
 		
 		ImageIcon icone = createImageIcon(cheminImage);
+		
 		
 		labelphotoEleve = new JLabel(icone, JLabel.CENTER);
 		labelphotoEleve.setPreferredSize(new Dimension(100, 100));
@@ -105,7 +104,7 @@ public class ControlePresence extends JFrame {
 		textFieldInput = new JTextField();
 		textFieldInput.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				rechercheETUpdate();
+				rechercheEtUpdate();
 			}
 		});
 		
@@ -116,11 +115,12 @@ public class ControlePresence extends JFrame {
 			
 		boiteVerticale.add(boiteHorizontale2);
 		
+		
+		// Bouton de fin du contrôle de présence
 		Box boiteHorizontale3= Box.createHorizontalBox();
 		boiteHorizontale3.add(Box.createGlue());
 		JButton boutonFinControle = new JButton("Fin du contrôle");
 		boutonFinControle.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				terminerControle();
 			}
@@ -128,19 +128,17 @@ public class ControlePresence extends JFrame {
 		
 		boiteHorizontale3.add(boutonFinControle);
 		boiteHorizontale3.add(Box.createGlue());
-			
 		boiteVerticale.add(boiteHorizontale3);
 		
 		boiteVerticale.add(Box.createGlue());
 		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
 
 		
-		
+		// Bouton de retour
 		Box boiteHorizontale4= Box.createHorizontalBox();
 		boiteHorizontale4.add(Box.createGlue());
 		JButton boutonRetour = new JButton("Retour");
 		boutonRetour.addMouseListener(new MouseAdapter() {
-			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				retourSelectionCours();
 			}
@@ -148,33 +146,29 @@ public class ControlePresence extends JFrame {
 		
 		boiteHorizontale4.add(boutonRetour);
 		boiteHorizontale4.add(Box.createGlue());
-			
 		boiteVerticale.add(boiteHorizontale4);
 		
 		boiteVerticale.add(Box.createGlue());
 		panelDroite.add(boiteVerticale,BorderLayout.CENTER);
 		
+		
 		// Gestion de la partie gauche (liste des étudiants)
 		panelGauche = new JPanel();
 		panelGauche.setLayout(new BorderLayout());
 		
-
-		// create a cell renderer to add the appropriate icon
+		
 		listeEtudiants = majListeEtudiants();
-
 		listeEtudiants.setCellRenderer(new MaListeEleves());
-
-
+		
 		panelGauche.add(listeEtudiants, BorderLayout.CENTER);
-
-		splitPane= new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-				panelGauche, panelDroite);
+		
+		splitPane= new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, panelGauche, panelDroite);
 		splitPane.setDividerLocation(300);
 
 		contentPane.add(splitPane, BorderLayout.CENTER);
 		contentPane.add(titreFenetre, BorderLayout.NORTH);
-		// contentPane.add(panelDroite, BorderLayout.EAST);
 	}
+	
 	
 	
 	public JList majListeEtudiants() {
@@ -191,33 +185,32 @@ public class ControlePresence extends JFrame {
 		return liste;
 	}
 	
-	public void majPhoto(){
+	
+	
+	public void majPhoto() {
 		String cheminImage = "";
-
-		System.out.println("mise en place de la photo");
+		
 		if(this.dernierEtudiant == null) {
-			System.out.println("le dernier etudiant est NULL");
 			cheminImage = this.cheminAnonyme;
 		}
 		else {
-			System.out.println("Hop, on change et on met celle de " + dernierEtudiant.getPrenom() + ":" + dernierEtudiant.getLienPhotoDisque());
 			cheminImage = this.dernierEtudiant.getLienPhotoDisque();
 		}
 		
 		ImageIcon icone = createImageIcon(cheminImage);
 		
 		labelphotoEleve.setIcon(icone);
-		
 	}
-	public void rechercheETUpdate() {
+	
+	
+	
+	public void rechercheEtUpdate() {
 		String myfareTrouve = textFieldInput.getText();
+		
 		for (Etudiant etu : ListeEtudiants.etudiants) {
 			if (etu.getNumeroMifare().equals(myfareTrouve)) {
 				etu.setPresent(true);
 				dernierEtudiant = etu;
-				/*System.out.println(myfareTrouve
-						+ " a ete considere comme present : c\'est "
-						+ etu.getNom());*/
 			}
 		}
 		textFieldInput.setText("");
@@ -225,9 +218,10 @@ public class ControlePresence extends JFrame {
 		this.majPhoto();
 
 		this.repaint();
-
 	}
-
+	
+	
+	
 	public static ImageIcon createImageIcon(String path) {
 			ImageIcon retour = new ImageIcon() ;
 	
@@ -238,32 +232,34 @@ public class ControlePresence extends JFrame {
             	retour.setImage(mieux);
 
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			return retour;
 	}
 	
-	public static ImageIcon createImageListe(String path){
+	
+	
+	public static ImageIcon createImageListe(String path) {
 		ImageIcon retour = new ImageIcon() ;
-		System.out.println("Appel de la fonction createImageListe");
+		
 		try {
 			Image img = ImageIO.read(new File(path));
         	Image mieux = img.getScaledInstance(30, 30, 1);
         	retour.setImage(mieux);
-    		System.out.println("on renvoie bien l'image : " + path);
 
 		} catch (IOException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
 		return retour;
 	}
 	
+	
+	
 	public void setDernierEtudiant(Etudiant etu){
 		this.dernierEtudiant = etu;
 	}
+	
 	
 	
 	/**
@@ -278,6 +274,8 @@ public class ControlePresence extends JFrame {
 		Main.fenetreListeAbsents.setVisible(true);
 	}
 	
+	
+	
 	/**
 	 * Retourner à la fenêtre de séléction du cours
 	 */
@@ -287,7 +285,6 @@ public class ControlePresence extends JFrame {
 												  "Toutes les données seront perdues ! Vous devrez scanner à nouveau tous les étudiants.",
 												  "Attention",
 												  JOptionPane.OK_CANCEL_OPTION);
-		System.out.println(choix);
 		
 		if(choix == 0) {
 			// On désactive la touche VERR MAJ
@@ -298,5 +295,4 @@ public class ControlePresence extends JFrame {
 			Main.fenetreSelectionCours.setVisible(true);
 		}
 	}
-	
 }

@@ -41,8 +41,9 @@ public class FenetreListeAbsents extends JFrame {
 				textAreaEtudiantsAbsents.setText(textAreaEtudiantsAbsents.getText()+etu.getPrenom() + " " + etu.getNom()+ "\n");
 			}
 		}
+		
+		textAreaEtudiantsAbsents.setEditable(false);
 	}
-	
 	
 	
 	
@@ -57,61 +58,62 @@ public class FenetreListeAbsents extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		
 		this.listeEtudiants = listeEtudiants;
-		
 		creerListeAbsents();
-		
 		
 		Box boiteVerticale = Box.createVerticalBox();
 		boiteVerticale.add(Box.createGlue());
-			Box boiteHorizontale1= Box.createHorizontalBox();
+		
+		Box boiteHorizontale1= Box.createHorizontalBox();
 			boiteHorizontale1.add(Box.createGlue());
-			JLabel labelDescription = new JLabel("Liste des absents de ce cours : ");
-
+			JLabel labelDescription = new JLabel("Liste des absents à ce cours : ");
 			boiteHorizontale1.add(labelDescription);
 			boiteHorizontale1.add(Box.createGlue());
-			
 		boiteVerticale.add(boiteHorizontale1);
 		
-			Box boiteHorizontale2= Box.createHorizontalBox();
+		Box boiteHorizontale2= Box.createHorizontalBox();
 			boiteHorizontale2.add(Box.createGlue());
 			boiteHorizontale2.add(textAreaEtudiantsAbsents);
 			boiteHorizontale2.add(Box.createGlue());
+		boiteVerticale.add(boiteHorizontale2);
 		
-	boiteVerticale.add(boiteHorizontale2);
-	boiteVerticale.add(Box.createGlue());
-	
-	JPanel panel_boutons = new JPanel();
-	panel_boutons.setLayout(new FlowLayout());
-	JButton boutonAnnuler = new JButton("Annuler");
-	boutonAnnuler.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			retourControle();
-		}
-	});
-	JButton boutonEnvoyer = new JButton("Envoyer");
-	boutonEnvoyer.addMouseListener(new MouseAdapter() {
-		@Override
-		public void mouseClicked(MouseEvent arg0) {
-			envoyer();
-		}
-	});
-	panel_boutons.add(boutonAnnuler);
-	panel_boutons.add(boutonEnvoyer);
-	contentPane.add(boiteVerticale,BorderLayout.CENTER);
-	contentPane.add(panel_boutons,BorderLayout.SOUTH);
+		boiteVerticale.add(Box.createGlue());
 		
+		JPanel panel_boutons = new JPanel();
+		panel_boutons.setLayout(new FlowLayout());
 		
+		// Bouton annuler
+		JButton boutonAnnuler = new JButton("Annuler");
+		boutonAnnuler.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				retourControle();
+			}
+		});
+		
+		// Bouton envoyer
+		JButton boutonEnvoyer = new JButton("Envoyer");
+		boutonEnvoyer.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent arg0) {
+				envoyer();
+			}
+		});
+		
+		panel_boutons.add(boutonAnnuler);
+		panel_boutons.add(boutonEnvoyer);
+		contentPane.add(boiteVerticale,BorderLayout.CENTER);
+		contentPane.add(panel_boutons,BorderLayout.SOUTH);
 	}
 	
 	
-	public void envoyer(){
+	
+	public void envoyer() {
 		JOptionPane jop = new JOptionPane();
 		
-		jop.showMessageDialog(null,"Non implémenté pour le moment",
-				"Impossible", JOptionPane.ERROR_MESSAGE);
+		jop.showMessageDialog(null,"Non implémenté pour le moment", "Impossible", JOptionPane.ERROR_MESSAGE);
 	}
+	
+	
 	
 	/**
 	 * Retour à la fenêtre de contrôle des présences

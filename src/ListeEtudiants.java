@@ -9,6 +9,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Properties;
+
+import javax.swing.JOptionPane;
 
 import org.jdom.*;
 import org.jdom.input.*;
@@ -23,7 +26,6 @@ public class ListeEtudiants {
 	 * L'attribut 'etudiants' contient la liste des étudiants concernés par le contrôle de présence.
 	 */
 	protected static ArrayList<Etudiant> etudiants = new ArrayList<Etudiant>();
-	
 	
 	
 	
@@ -48,70 +50,58 @@ public class ListeEtudiants {
 		Element racine = new Element("etudiants");
 		org.jdom.Document document = new Document(racine);
 		
-		// Chargement du driver Mysql
+		// Chargement du driver PostgreSQL
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.postgresql.Driver");
 		}
 		catch(java.lang.ClassNotFoundException e) {
+			System.out.println("Erreur : driver Postgresql non trouvé");
 			System.err.print("ClassNotFoundException");
 			System.err.println(e.getMessage());
 		}
 		
-		// URL de la base de donnée
-		String url = "jdbc:mysql://localhost:3306/forumprepa";
 		
 		try {
 			// Connexion à la base de données
-			Connection con = DriverManager.getConnection(url, "root", "");
+			Properties prop = new Properties();
+			prop.put("user", "testetudiant");
+			prop.put("password", "ei3info");
+			prop.put("useUnicode", "true");
+			prop.put("characterEncoding", "utf-8");
+			Connection con = DriverManager.getConnection("jdbc:postgresql://agapbd.ec-nantes.fr/AGAPTest", prop);
 			
 			// Requête : liste des étudiants
 			Statement stmt = con.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT nom, prenom, groupe, numeroMifare, numeroEtudiant, lienPhoto FROM etudiants");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM etudiants WHERE cycle_libelle='2011-2012' ORDER BY personne_nom");
 			
-			ArrayList<String> listeGroupes = new ArrayList<String>();
-			
-			rs.next();
-			
-			Etudiant etu = new Etudiant(rs.getString(1), rs.getString(2), "", rs.getString(6), rs.getString(4), rs.getString(5));
-			listeGroupes.add(rs.getString(3));
-			
-			
-			/* Un étudiant apparaît autant de fois que de groupes auquel il appartient.
-			 * Les lignes se suivent. Pour chaque résultat, on compare avec le résultat
-			 * précédent pour voir s'il s'agit du même étudiant.
-			 * On stocke les groupes dans l'ArrayList groupes */
+			// On ajoute chaque étudiant au fichier XML
 			while(rs.next()) {
-				if(rs.getString(4).equals(etu.getNumeroMifare())) {
-					// C'est le même étudiant, on ajoute le groupe
-					listeGroupes.add(rs.getString(3));
-				}
-				else {
-					// Ce n'est pas le même étudiant. On ajoute le précédent étudiant dans le fichier XML.
-					ListeEtudiants.ajouterEtudiantXML(etu, listeGroupes, racine);
-					
-					listeGroupes.clear();
-					
-					etu.setNom(rs.getString(1)); etu.setPrenom(rs.getString(2));
-					etu.setNumeroMifare(rs.getString(4)); etu.setNumeroEtudiant(rs.getString(5));
-					etu.setLienPhoto(rs.getString(6));
-					listeGroupes.add(rs.getString(3));
-				}
+				Etudiant etu = new Etudiant(rs.getString(1), rs.getString(2), "", rs.getString(5), rs.getString(4));
+				
+				ListeEtudiants.ajouterEtudiantXML(etu, racine);
 			}
 			
-			// On ajoute le dernier étudiant au fichier XML
-			ListeEtudiants.ajouterEtudiantXML(etu, listeGroupes, racine);
+			try {
+				XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
+				sortie.output(document, new FileOutputStream("etudiants.xml"));
+			}
+			catch(java.io.IOException e) {
+				JOptionPane jop = new JOptionPane();
+				jop.showMessageDialog(null,
+									  "Erreur lors de l'enregistrement du fichier XML. Veuillez recommencer.",
+									  "Erreur",
+									  JOptionPane.ERROR_MESSAGE);
+				System.out.println(e.getMessage());
+				return false;
+			}
 		}
 		catch(SQLException ex) {
+			JOptionPane jop = new JOptionPane();
+			jop.showMessageDialog(null,
+								  "Erreur lors de la connexion à la base de données AGAP.",
+								  "Erreur",
+								  JOptionPane.ERROR_MESSAGE);
 			System.err.println("SQLException :" + ex.getMessage());
-		}
-		
-		try {
-			XMLOutputter sortie = new XMLOutputter(Format.getPrettyFormat());
-			sortie.output(document, new FileOutputStream("etudiants.xml"));
-		}
-		catch(java.io.IOException e) {
-			System.out.println("Erreur lors de l'enregistrement du fichier etudiants.xml");
-			System.out.println(e.getMessage());
 		}
 		
 		return true;
@@ -175,7 +165,6 @@ public class ListeEtudiants {
 			Etudiant etu = new Etudiant(courant.getChildText("nom"),
 										courant.getChildText("prenom"),
 										courant.getChildText("groupe"),
-										courant.getChildText("lienPhoto"),
 										courant.getChildText("numeroMifare"),
 										courant.getChildText("numeroEtudiant"));
 			etudiants.add(etu);
@@ -193,7 +182,7 @@ public class ListeEtudiants {
 	 * @param listeGroupes : groupes auquels appartient l'étudiant
 	 * @param racine : racine du fichier XML
 	 */
-	public static void ajouterEtudiantXML(Etudiant etu, ArrayList<String> listeGroupes, Element racine) {
+	public static void ajouterEtudiantXML(Etudiant etu, Element racine) {
 	
 		Element etudiant = new Element("etudiant");
 		racine.addContent(etudiant);
@@ -202,24 +191,15 @@ public class ListeEtudiants {
 		nom.setText(etu.getNom());
 		Element prenom = new Element("prenom");
 		prenom.setText(etu.getPrenom());
-		Element lienPhoto = new Element("lienPhoto");
-		lienPhoto.setText(etu.getLienPhoto());
 		Element numeroMifare = new Element("numeroMifare");
 		numeroMifare.setText(etu.getNumeroMifare());
 		Element numeroEtudiant = new Element("numeroEtudiant");
 		numeroEtudiant.setText(etu.getNumeroEtudiant());
-		
 		Element groupes = new Element("groupes");
-		for(String s : listeGroupes) {
-			Element groupe = new Element("groupe");
-			groupe.setText(s);
-			groupes.addContent(groupe);
-		}
 		
 		etudiant.addContent(nom);
 		etudiant.addContent(prenom);
 		etudiant.addContent(groupes);
-		etudiant.addContent(lienPhoto);
 		etudiant.addContent(numeroMifare);
 		etudiant.addContent(numeroEtudiant);
 	}
