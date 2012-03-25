@@ -4,21 +4,19 @@
     <nom>Aunis</nom>
     <prenom>Jean</prenom>
 	<groupes>
-		<groupe>A</groupe>
-		<groupe>eOSINF</groupe>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-GI</groupe>
 	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/media.jpg</lienPhoto>
-	<numeroMifare>435621879645</numeroMifare>
+	<numeroMifare>0652825467</numeroMifare>
 	<numeroEtudiant>45214Q</numeroEtudiant>
   </etudiant>
   <etudiant>
     <nom>Bro</nom>
     <prenom>Sébastien</prenom>
 	<groupes>
-		<groupe>B</groupe>
-		<groupe>eIMAGE</groupe>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-SI</groupe>
 	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/trez.jpg</lienPhoto>
 	<numeroMifare>4653217584</numeroMifare>
 	<numeroEtudiant>46895S</numeroEtudiant>
   </etudiant>
@@ -26,67 +24,61 @@
     <nom>Bugnet</nom>
     <prenom>Guillaume</prenom>
 	<groupes>
-		<groupe>A</groupe>
-		<groupe>eIMAGE</groupe>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-SI</groupe>
 	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/prez.jpg</lienPhoto>
 	<numeroMifare>3176300779</numeroMifare>
 	<numeroEtudiant>75412V</numeroEtudiant>
-  </etudiant>
-  <etudiant>
-    <nom>Debon</nom>
-    <prenom>Julien</prenom>
-	<groupes>
-		<groupe>B</groupe>
-		<groupe>eOSINF</groupe>
-	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/communication.jpg</lienPhoto>
-	<numeroMifare>0341156636</numeroMifare>
-	<numeroEtudiant>01243S</numeroEtudiant>
   </etudiant>
   <etudiant>
     <nom>Laurent</nom>
     <prenom>Marc</prenom>
 	<groupes>
-		<groupe>B</groupe>
-		<groupe>eOSINF</groupe>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-SI</groupe>
 	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/relations_entreprises.jpg</lienPhoto>
-	<numeroMifare>465329867414</numeroMifare>
+	<numeroMifare>3678451339</numeroMifare>
 	<numeroEtudiant>46132A</numeroEtudiant>
+  </etudiant>
+  <etudiant>
+    <nom>Laurent</nom>
+    <prenom>Julien</prenom>
+	<groupes>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-SI</groupe>
+	</groupes>
+	<numeroMifare>3678445691</numeroMifare>
+	<numeroEtudiant>42132A</numeroEtudiant>
+  </etudiant>
+  <etudiant>
+    <nom>Lefevre</nom>
+    <prenom>Daniel</prenom>
+	<groupes>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-GI</groupe>
+	</groupes>
+	<numeroMifare>3677738955</numeroMifare>
+	<numeroEtudiant>12345A</numeroEtudiant>
   </etudiant>
   <etudiant>
     <nom>Magnien</nom>
     <prenom>Bertrand</prenom>
 	<groupes>
-		<groupe>A</groupe>
-		<groupe>eIMAGE</groupe>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-GI</groupe>
 	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/vice_prez.jpg</lienPhoto>
 	<numeroMifare>3677794795</numeroMifare>
 	<numeroEtudiant>45632X</numeroEtudiant>
   </etudiant>
   <etudiant>
-    <nom>Martin De la Haute Motte</nom>
-    <prenom>Jean-Charles</prenom>
+    <nom>Richard</nom>
+    <prenom>Antoine</prenom>
 	<groupes>
-		<groupe>B</groupe>
-		<groupe>eIMAGE</groupe>
+		<groupe>EI3INFO</groupe>
+		<groupe>EI3INFO-SI</groupe>
 	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/ateliers.jpg</lienPhoto>
-	<numeroMifare>789564313254</numeroMifare>
-	<numeroEtudiant>002134G</numeroEtudiant>
-  </etudiant>
-  <etudiant>
-    <nom>Saison</nom>
-    <prenom>Emilie</prenom>
-	<groupes>
-		<groupe>A</groupe>
-		<groupe>eIMAGE</groupe>
-	</groupes>
-	<lienPhoto>http://www.forumatlantique.info/img/trombi/logistique.jpg</lienPhoto>
-	<numeroMifare>10002345414</numeroMifare>
-	<numeroEtudiant>478500R</numeroEtudiant>
+	<numeroMifare>0651741867</numeroMifare>
+	<numeroEtudiant>072134G</numeroEtudiant>
   </etudiant>
 </etudiants>
 
